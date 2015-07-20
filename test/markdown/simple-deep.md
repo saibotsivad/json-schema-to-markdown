@@ -2,6 +2,8 @@
 
 This schema is awesome.
 
+The schema defines the following properties:
+
 ## `thing` (object)
 
 First level.

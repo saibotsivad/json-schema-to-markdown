@@ -73,7 +73,7 @@ function generateSchemaSectionText(octothorpes, name, isRequired, schema, subSch
 			})
 		}
 	} else if (schemaType === 'enum') {
-		text.push('The object is an enum, with one of the following required items:')
+		text.push('The object is an enum, with one of the following required values:')
 		text.push(schema.enum.map(function(enumItem) {
 			return '* `' + enumItem + '`'
 		}).join('\n'))
@@ -140,6 +140,7 @@ module.exports = function(schema) {
 	}
 
 	if (schema.type === 'object') {
+		text.push('The schema defines the following properties:')
 		generatePropertySection(octothorpes, schema, subSchemaTypes).forEach(function(section) {
 			text = text.concat(section)
 		})

@@ -2,6 +2,8 @@
 
 This schema is awesome.
 
+The schema defines the following properties:
+
 ## `pants` (pants)
 
 The kind of pants.
@@ -22,7 +24,7 @@ Properties of the `pants` object:
 
 The color of pants.
 
-The object is an enum, with one of the following required items:
+The object is an enum, with one of the following required values:
 
 * `red`
 * `white`
