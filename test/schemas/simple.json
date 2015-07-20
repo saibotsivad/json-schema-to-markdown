@@ -1,0 +1,12 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "Example Schema",
+	"description": "This schema is awesome.",
+	"type": "object",
+	"properties": {
+		"price": {
+			"description": "Cost of the product.",
+			"type": "number"
+		}
+	}
+}

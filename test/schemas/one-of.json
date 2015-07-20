@@ -1,0 +1,25 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "Example Schema",
+	"description": "This schema is awesome.",
+	"type": "object",
+	"properties": {
+		"lower": {
+			"description": "Lower clothing.",
+			"oneOf": [
+				{ "$ref": "#/definitions/pants" },
+				{ "$ref": "#/definitions/shorts" }
+			]
+		}
+	},
+	"definitions": {
+		"pants": {
+			"description": "Long on the legs.",
+			"type": "string"
+		},
+		"shorts": {
+			"description": "Short on the legs.",
+			"type": "string"
+		}
+	}
+}

@@ -1,0 +1,32 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "Example Schema",
+	"description": "This schema is awesome.",
+	"type": "object",
+	"properties": {
+		"words": {
+			"description": "Cool words.",
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		},
+		"names" : {
+			"description": "Cool names.",
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"first": {
+						"description": "First name",
+						"type": "string"
+					},
+					"last": {
+						"description": "Last name.",
+						"type": "string"
+					}
+				}
+			}
+		}
+	}
+}

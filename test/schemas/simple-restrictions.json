@@ -1,0 +1,28 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "Example Schema",
+	"description": "This schema is awesome.",
+	"type": "object",
+	"properties": {
+		"price": {
+			"description": "Cost of the product.",
+			"type": "number",
+			"minimum": 3,
+			"maximum": 12
+		},
+		"colors": {
+			"description": "Any kind of color.",
+			"type": "array",
+			"items": {
+				"type": "string"
+			},
+			"minItems": 1,
+			"uniqueItems": true
+		},
+		"serial": {
+			"description": "A kind of serial number.",
+			"type": "string",
+			"pattern": "^[0-9]{3}_[A-F]{4}$"
+		}
+	}
+}

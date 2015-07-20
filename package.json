@@ -1,0 +1,26 @@
+{
+  "name": "json-schema-to-markdown",
+  "version": "1.0.0",
+  "description": "Turn a JSON Schema into a markdown file.",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tobiaslabs/json-schema-to-markdown.git"
+  },
+  "keywords": [
+    "json-schema",
+    "markdown"
+  ],
+  "author": "saibotsivad",
+  "license": "VOL",
+  "bugs": {
+    "url": "https://github.com/tobiaslabs/json-schema-to-markdown/issues"
+  },
+  "homepage": "https://github.com/tobiaslabs/json-schema-to-markdown",
+  "devDependencies": {
+    "tape": "^4.0.0"
+  }
+}
