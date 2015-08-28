@@ -10,7 +10,7 @@ var coreSchemaTypes = [
 	'string'
 ]
 
-function generateElementTitle(octothorpes, elementName, elementType, isRequired) {
+function generateElementTitle(octothorpes, elementName, elementType, isRequired, example) {
 	var text = [ octothorpes, ' `', elementName, '`' ]
 	if (elementType || isRequired) {
 		text.push(' (')
@@ -21,6 +21,9 @@ function generateElementTitle(octothorpes, elementName, elementType, isRequired)
 			text.push(', required')
 		}
 		text.push(')')
+	}
+	if (example) {
+		text.push(' eg: `'+example+'`')
 	}
 	return text.join('')
 }
@@ -52,7 +55,7 @@ function generateSchemaSectionText(octothorpes, name, isRequired, schema, subSch
 	var schemaType = getActualType(schema, subSchemas)
 
 	var text = [
-		generateElementTitle(octothorpes, name, schemaType, isRequired),
+		generateElementTitle(octothorpes, name, schemaType, isRequired, schema.example),
 		schema.description
 	]
 	if (schemaType === 'object') {

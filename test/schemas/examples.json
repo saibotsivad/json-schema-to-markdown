@@ -1,0 +1,30 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "Example Schema",
+	"description": "This schema is awesome.",
+	"type": "object",
+	"properties": {
+		"pants": {
+			"description": "The kind of pants.",
+			"$ref": "#/definitions/pants"
+		}
+	},
+	"definitions": {
+		"pants": {
+			"description": "Some pants.",
+			"type": "object",
+			"properties": {
+				"color": {
+					"description": "The color of pants.",
+					"enum": ["red", "white", "blue"]
+				},
+				"size": {
+					"description": "The size of pants.",
+					"type": "number",
+					"example": "33"
+				}
+			},
+			"required": ["color", "size"]
+		}
+	}
+}
