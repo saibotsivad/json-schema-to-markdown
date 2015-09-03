@@ -11,7 +11,8 @@ var testGoodFiles = [
 	'simple-deep',
 	'simple-no-title',
 	'simple-definition',
-	'one-of'
+	'one-of',
+	'examples'
 ]
 
 test('All the files parse as expected.', function(t) {
