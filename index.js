@@ -89,6 +89,15 @@ function generateSchemaSectionText(octothorpes, name, isRequired, schema, subSch
 		}).join('\n'))
 	}
 
+	if (schema.default !== undefined) {
+		if (schema.default === null || [ "boolean", "number", "string" ].indexOf(typeof schema.default) !== -1) {
+			text.push('Default: `' + JSON.stringify(schema.default) + '`')
+		} else {
+			text.push('Default:')
+			text.push('```\n' + JSON.stringify(schema.default, null, 2) + '\n```')
+		}
+	}
+
 	var restrictions = generatePropertyRestrictions(schema)
 	if (restrictions) {
 		text.push('Additional restrictions:')

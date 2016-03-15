@@ -1,0 +1,41 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "Example Schema",
+	"description": "This schema is awesome.",
+	"type": "object",
+	"properties": {
+		"price": {
+			"description": "Cost of the product.",
+			"type": "number",
+			"default": 0
+		},
+		"color": {
+			"description": "Color of the product.",
+			"type": "string",
+			"default": "red"
+		},
+		"elasticated": {
+			"description": "Indicates whether the garments are elasticated.",
+			"type": "boolean",
+			"default": true
+		},
+		"availableStyles": {
+			"description": "Lists of the available styles of the product.",
+			"type": "array",
+			"items": { "type": "string" },
+			"default": [ "plain", "stripes", "stars" ]
+		},
+		"washingRecommendation": {
+			"description": "Washing recommendations.",
+			"type": "object",
+			"default": {
+				"temperature": "Wash at or below 60°C"
+			}
+		},
+		"specialOffer": {
+			"description": "An associated special offer.",
+			"type": "object",
+			"default": null
+		}
+	}
+}

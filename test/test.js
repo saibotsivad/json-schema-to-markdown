@@ -13,7 +13,8 @@ var testGoodFiles = [
 	'simple-definition',
 	'simple-no-properties',
 	'one-of',
-	'examples'
+	'examples',
+	"default-properties"
 ]
 
 test('All the files parse as expected.', function(t) {
