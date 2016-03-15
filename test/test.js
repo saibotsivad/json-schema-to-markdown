@@ -11,6 +11,7 @@ var testGoodFiles = [
 	'simple-deep',
 	'simple-no-title',
 	'simple-definition',
+	'simple-no-properties',
 	'one-of',
 	'examples'
 ]
