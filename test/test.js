@@ -11,8 +11,10 @@ var testGoodFiles = [
 	'simple-deep',
 	'simple-no-title',
 	'simple-definition',
+	'simple-no-properties',
 	'one-of',
-	'examples'
+	'examples',
+	"default-properties"
 ]
 
 test('All the files parse as expected.', function(t) {
@@ -20,7 +22,7 @@ test('All the files parse as expected.', function(t) {
 		var json = require('./schemas/' + file + '.json')
 		var markdown = fs.readFileSync('./test/markdown/' + file + '.md', 'utf8')
 		var parsed = parser(json)
-		t.equal(parsed, markdown, 'markdown file should match parser output')
+		t.equal(parsed, markdown, 'markdown file "' + file + '" should match parser output')
 	})
 	t.end()
 })

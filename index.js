@@ -59,10 +59,12 @@ function generateSchemaSectionText(octothorpes, name, isRequired, schema, subSch
 		schema.description
 	]
 	if (schemaType === 'object') {
-		text.push('Properties of the `' + name + '` object:')
-		generatePropertySection(octothorpes, schema, subSchemas).forEach(function(section) {
-			text = text.concat(section)
-		})
+		if (schema.properties) {
+			text.push('Properties of the `' + name + '` object:')
+			generatePropertySection(octothorpes, schema, subSchemas).forEach(function(section) {
+				text = text.concat(section)
+			})
+		}
 	} else if (schemaType === 'array') {
 		var itemsType = schema.items && schema.items.type
 		if (!itemsType && schema.items['$ref']) {
@@ -85,6 +87,15 @@ function generateSchemaSectionText(octothorpes, name, isRequired, schema, subSch
 		text.push(schema.oneOf.map(function(oneOf) {
 			return '* `' + subSchemas[oneOf['$ref']] + '`'
 		}).join('\n'))
+	}
+
+	if (schema.default !== undefined) {
+		if (schema.default === null || [ "boolean", "number", "string" ].indexOf(typeof schema.default) !== -1) {
+			text.push('Default: `' + JSON.stringify(schema.default) + '`')
+		} else {
+			text.push('Default:')
+			text.push('```\n' + JSON.stringify(schema.default, null, 2) + '\n```')
+		}
 	}
 
 	var restrictions = generatePropertyRestrictions(schema)
@@ -157,7 +168,9 @@ module.exports = function(schema) {
 			text.push('## `' + subSchemaTypeName + '` (' + schema.definitions[subSchemaTypeName].type + ')')
 			text.push(schema.definitions[subSchemaTypeName].description)
 			if (schema.definitions[subSchemaTypeName].type === 'object') {
-				text.push('Properties of the `' + subSchemaTypeName + '` object:')
+				if (schema.definitions[subSchemaTypeName].properties) {
+					text.push('Properties of the `' + subSchemaTypeName + '` object:')
+				}
 			}
 			generatePropertySection('##', schema.definitions[subSchemaTypeName], subSchemaTypes).forEach(function(section) {
 				text = text.concat(section)

@@ -1,0 +1,23 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "Example Schema",
+	"description": "This schema is awesome.",
+	"type": "object",
+	"properties": {
+		"custom": {
+			"description": "Custom configuration properties.",
+			"$ref": "#/definitions/customProperties"
+		},
+		"paths": {
+			"description": "Named paths.",
+			"type": "object",
+			"additionalProperties": { "type": "string" }
+		}
+	},
+	"definitions": {
+		"customProperties": {
+			"description": "Map of custom configuration properties.",
+			"type": "object"
+		}
+	}
+}
