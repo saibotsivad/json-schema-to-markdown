@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 var fs = require('fs');
 var parse = require('json-schema-to-markdown');
 for (var i = 2; i < process.argv.length; i++) {
