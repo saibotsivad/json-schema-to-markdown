@@ -3,14 +3,24 @@
 This module turns a [JSON Schema](http://json-schema.org/) into a
 human-readable markdown file.
 
+<!-- BEGIN-MARKDOWN-TOC -->
+* [Installation](#installation)
+* [Usage](#usage)
+* [Command line](#command-line)
+* [License](#license)
+
+<!-- END-MARKDOWN-TOC -->
+
 This module does *not* implement anywhere near the full RFC specs.
 If you have bits of the RFC that you'd like implemented, let me
 know and I'll try to add them in a timely manner. Pull requests
 are also very welcome.
 
-# using
+## Installation
 
 Install the normal way: `npm install json-schema-to-markdown`
+
+## Usage
 
 Use it like this:
 
@@ -54,6 +64,20 @@ The schema defines the following properties:
 Cost of the product.
 ```
 
-# license
+## Command line
 
-Published and release under the [Very Open License](http://veryopenlicense.com).
+If installed globally (`npm install -g json-schema-to-markdown`), a script `json-schema-to-markdown` is available to convert JSON schema files to Markdown on the command line.
+
+```sh
+json-schema-to-markdown schema.json > schema.json.md
+```
+
+You can also read the JSON from STDIN:
+
+```sh
+cat schema.json | json-schema-to-markdown - > schema.json.md
+```
+
+## License
+
+Published and released under the [Very Open License](http://veryopenlicense.com).
