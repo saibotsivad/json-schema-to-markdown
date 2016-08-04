@@ -166,7 +166,7 @@ module.exports = function(schema) {
 		generatePropertySection(octothorpes, schema, subSchemaTypes).forEach(function(section) {
 			text = text.concat(section)
 		})
-	} else if (schema.type === 'array') {
+	} else {
 		text = text.concat(generateSchemaSectionText('#' + octothorpes, undefined, false, schema, subSchemaTypes));
 	}
 

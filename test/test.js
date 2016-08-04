@@ -13,6 +13,11 @@ var testGoodFiles = [
 	'simple-definition',
 	'simple-no-properties',
 	'bare-array',
+	'bare-boolean',
+	'bare-integer',
+	'bare-null',
+	'bare-number',
+	'bare-string',
 	'one-of',
 	'examples',
 	"default-properties"
