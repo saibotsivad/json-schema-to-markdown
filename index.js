@@ -76,11 +76,32 @@ function generateSchemaSectionText(octothorpes, name, isRequired, schema, subSch
 		if (!itemsType && schema.items['$ref']) {
 			itemsType = getActualType(schema.items, subSchemas)
 		}
-		if(name) {
+		if(itemsType && name) {
 			text.push('The object is an array with all elements of the type `' + itemsType + '`.')
 		}
-		else {
+		else if (itemsType) {
 			text.push('The schema defines an array with all elements of the type `' + itemsType + '`.')
+		}
+		else {
+			var validationItems = []
+			if (schema.items.allOf) {
+				text.push('The elements of the array must match *all* of the following properties:')
+				validationItems = schema.items.allOf
+			} else if (schema.items.anyOf) {
+				text.push('The elements of the array must match *at least one* of the following properties:')
+				validationItems = schema.items.anyOf
+			} else if (schema.items.oneOf) {
+				text.push('The elements of the array must match *exactly one* of the following properties:')
+				validationItems = schema.items.oneOf
+			} else if (schema.items.not) {
+				text.push('The elements of the array must *not* match the following properties:')
+				validationItems = schema.items.not
+			}
+			if (validationItems.length > 0) {
+				validationItems.forEach(function(item) {
+					text = text.concat(generateSchemaSectionText(octothorpes, undefined, false, item, subSchemas))
+				})
+			}
 		}
 		if (itemsType === 'object') {
 			text.push('The array object has the following properties:')

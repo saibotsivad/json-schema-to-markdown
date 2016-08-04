@@ -20,6 +20,7 @@ var testGoodFiles = [
 	'bare-string',
 	'bare-string-enum',
 	'one-of',
+	'items-one-of',
 	'examples',
 	"default-properties"
 ]
