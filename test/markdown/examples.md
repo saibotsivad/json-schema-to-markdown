@@ -20,11 +20,11 @@ Some pants.
 
 Properties of the `pants` object:
 
-### `color` (enum, required)
+### `color` (string, enum, required)
 
 The color of pants.
 
-The object is an enum, with one of the following required values:
+This element must be one of the following enum values:
 
 * `red`
 * `white`

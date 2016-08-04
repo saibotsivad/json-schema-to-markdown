@@ -4,11 +4,11 @@ This schema is awesome.
 
 The schema defines the following properties:
 
-## `butts` (enum)
+## `butts` (string, enum)
 
 The kind of butts.
 
-The object is an enum, with one of the following required values:
+This element must be one of the following enum values:
 
 * `big`
 * `small`

@@ -6,6 +6,7 @@
 	"properties": {
 		"butts": {
 			"description": "The kind of butts.",
+			"type": "string",
 			"enum": ["big", "small", 9001]
 		}
 	}

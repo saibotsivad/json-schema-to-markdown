@@ -10,7 +10,7 @@ var coreSchemaTypes = [
 	'string'
 ]
 
-function generateElementTitle(octothorpes, elementName, elementType, isRequired, example) {
+function generateElementTitle(octothorpes, elementName, elementType, isRequired, isEnum, example) {
 	var text = [ octothorpes ]
 	if(elementName) {
 		text.push(' `' + elementName + '`');
@@ -19,6 +19,9 @@ function generateElementTitle(octothorpes, elementName, elementType, isRequired,
 		text.push(' (')
 		if (elementType) {
 			text.push(elementType)
+		}
+		if (isEnum) {
+			text.push(', enum')
 		}
 		if (isRequired) {
 			text.push(', required')
@@ -58,7 +61,7 @@ function generateSchemaSectionText(octothorpes, name, isRequired, schema, subSch
 	var schemaType = getActualType(schema, subSchemas)
 
 	var text = [
-		generateElementTitle(octothorpes, name, schemaType, isRequired, schema.example),
+		generateElementTitle(octothorpes, name, schemaType, isRequired, schema.enum, schema.example),
 		schema.description
 	]
 	if (schemaType === 'object') {
@@ -85,16 +88,18 @@ function generateSchemaSectionText(octothorpes, name, isRequired, schema, subSch
 				text = text.concat(section)
 			})
 		}
-	} else if (schemaType === 'enum') {
-		text.push('The object is an enum, with one of the following required values:')
-		text.push(schema.enum.map(function(enumItem) {
-			return '* `' + enumItem + '`'
-		}).join('\n'))
 	} else if (schema.oneOf) {
 		text.push('The object must be one of the following types:')
 		text.push(schema.oneOf.map(function(oneOf) {
 			return '* `' + subSchemas[oneOf['$ref']] + '`'
 		}).join('\n'))
+	}
+
+	if(schema.enum) {
+		text.push('This element must be one of the following enum values:');
+		text.push(schema.enum.map(function(enumItem) {
+			return '* `' + enumItem + '`'
+		}).join('\n'));
 	}
 
 	if (schema.default !== undefined) {
@@ -137,8 +142,6 @@ function getActualType(schema, subSchemas) {
 		return schema.type
 	} else if (schema['$ref'] && subSchemas[schema['$ref']]) {
 		return subSchemas[schema['$ref']]
-	} else if (schema.enum) {
-		return 'enum'
 	} else {
 		return undefined
 	}

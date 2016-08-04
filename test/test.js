@@ -18,6 +18,7 @@ var testGoodFiles = [
 	'bare-null',
 	'bare-number',
 	'bare-string',
+	'bare-string-enum',
 	'one-of',
 	'examples',
 	"default-properties"
