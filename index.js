@@ -144,7 +144,7 @@ function getActualType(schema, subSchemas) {
 	}
 }
 
-module.exports = function(schema) {
+module.exports = function(schema, startOcto) {
 	var subSchemaTypes = Object.keys(schema.definitions || {}).reduce(function(map, subSchemaTypeName) {
 		map['#/definitions/' + subSchemaTypeName] = subSchemaTypeName
 		return map
@@ -152,6 +152,9 @@ module.exports = function(schema) {
 
 	var text = []
 	var octothorpes = ''
+	if(startOcto) {
+		octothorpes = startOcto;
+	}
 
 	if (schema.title) {
 		octothorpes += '#'
