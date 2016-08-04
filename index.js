@@ -11,7 +11,10 @@ var coreSchemaTypes = [
 ]
 
 function generateElementTitle(octothorpes, elementName, elementType, isRequired, example) {
-	var text = [ octothorpes, ' `', elementName, '`' ]
+	var text = [ octothorpes ]
+	if(elementName) {
+		text.push(' `' + elementName + '`');
+	}
 	if (elementType || isRequired) {
 		text.push(' (')
 		if (elementType) {
@@ -70,7 +73,12 @@ function generateSchemaSectionText(octothorpes, name, isRequired, schema, subSch
 		if (!itemsType && schema.items['$ref']) {
 			itemsType = getActualType(schema.items, subSchemas)
 		}
-		text.push('The object is an array with all elements of the type `' + itemsType + '`.')
+		if(name) {
+			text.push('The object is an array with all elements of the type `' + itemsType + '`.')
+		}
+		else {
+			text.push('The schema defines an array with all elements of the type `' + itemsType + '`.')
+		}
 		if (itemsType === 'object') {
 			text.push('The array object has the following properties:')
 			generatePropertySection(octothorpes, schema.items, subSchemas).forEach(function(section) {
@@ -149,16 +157,18 @@ module.exports = function(schema) {
 		octothorpes += '#'
 		text.push(octothorpes + ' ' + schema.title)
 	}
-	if (schema.description) {
-		text.push(schema.description)
-	}
 
 	if (schema.type === 'object') {
+		if (schema.description) {
+			text.push(schema.description)
+		}
 		text.push('The schema defines the following properties:')
 		generatePropertySection(octothorpes, schema, subSchemaTypes).forEach(function(section) {
 			text = text.concat(section)
 		})
-	} else if (schema.type === 'array') {}
+	} else if (schema.type === 'array') {
+		text = text.concat(generateSchemaSectionText('#' + octothorpes, undefined, false, schema, subSchemaTypes));
+	}
 
 	if (schema.definitions) {
 		text.push('---')

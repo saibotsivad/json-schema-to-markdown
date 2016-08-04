@@ -12,6 +12,7 @@ var testGoodFiles = [
 	'simple-no-title',
 	'simple-definition',
 	'simple-no-properties',
+	'bare-array',
 	'one-of',
 	'examples',
 	"default-properties"
