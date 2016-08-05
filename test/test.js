@@ -23,6 +23,7 @@ var testGoodFiles = [
 	'one-of',
 	'items-one-of',
 	'examples',
+	'example-small',
 	"default-properties"
 ]
 

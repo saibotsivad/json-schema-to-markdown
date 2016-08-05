@@ -1,3 +1,7 @@
+// This is really messy, and I apologize for that.
+
+var Example = require('./src/example.js')
+
 var coreSchemaTypes = [
 	'array',
 	'boolean',
@@ -8,7 +12,7 @@ var coreSchemaTypes = [
 	'string'
 ]
 
-function generateElementTitle(octothorpes, elementName, elementType, isRequired, isEnum, example) {
+function generateElementTitle(octothorpes, elementName, elementType, isRequired, isEnum) {
 	var text = [ octothorpes ]
 	if(elementName) {
 		text.push(' `' + elementName + '`')
@@ -25,9 +29,6 @@ function generateElementTitle(octothorpes, elementName, elementType, isRequired,
 			text.push(', required')
 		}
 		text.push(')')
-	}
-	if (example) {
-		text.push(' eg: `' + example + '`')
 	}
 	return text.join('')
 }
@@ -59,7 +60,8 @@ function generateSchemaSectionText(octothorpes, name, isRequired, schema, subSch
 	var schemaType = getActualType(schema, subSchemas)
 
 	var text = [
-		generateElementTitle(octothorpes, name, schemaType, isRequired, schema.enum, schema.example),
+		generateElementTitle(octothorpes, name, schemaType, isRequired, schema.enum),
+		Example.renderExample(schema),
 		schema.description
 	]
 
@@ -186,6 +188,7 @@ module.exports = function(schema, startingOctothorpes) {
 	}
 
 	if (schema.type === 'object') {
+		text.push(Example.renderExample(schema))
 		if (schema.description) {
 			text.push(schema.description)
 		}

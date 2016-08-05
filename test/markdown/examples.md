@@ -30,6 +30,13 @@ This element must be one of the following enum values:
 * `white`
 * `blue`
 
-### `size` (number, required) eg: `33`
+### `size` (number, required)
+
+> ### Example JSON:
+
+```json
+"33"
+```
+
 
 The size of pants.
