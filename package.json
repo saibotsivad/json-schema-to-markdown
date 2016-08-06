@@ -6,6 +6,9 @@
   "scripts": {
     "test": "tape test/*.js"
   },
+  "bin": {
+  	  "json-schema-to-markdown": "./cli.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/tobiaslabs/json-schema-to-markdown.git"
