@@ -16,6 +16,7 @@
 			"properties": {
 				"color": {
 					"description": "The color of pants.",
+					"type": "string",
 					"enum": ["red", "white", "blue"]
 				},
 				"size": {

@@ -12,7 +12,15 @@ var testGoodFiles = [
 	'simple-no-title',
 	'simple-definition',
 	'simple-no-properties',
+	'bare-array',
+	'bare-boolean',
+	'bare-integer',
+	'bare-null',
+	'bare-number',
+	'bare-string',
+	'bare-string-enum',
 	'one-of',
+	'items-one-of',
 	'examples',
 	"default-properties"
 ]

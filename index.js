@@ -10,12 +10,18 @@ var coreSchemaTypes = [
 	'string'
 ]
 
-function generateElementTitle(octothorpes, elementName, elementType, isRequired, example) {
-	var text = [ octothorpes, ' `', elementName, '`' ]
+function generateElementTitle(octothorpes, elementName, elementType, isRequired, isEnum, example) {
+	var text = [ octothorpes ]
+	if(elementName) {
+		text.push(' `' + elementName + '`');
+	}
 	if (elementType || isRequired) {
 		text.push(' (')
 		if (elementType) {
 			text.push(elementType)
+		}
+		if (isEnum) {
+			text.push(', enum')
 		}
 		if (isRequired) {
 			text.push(', required')
@@ -55,7 +61,7 @@ function generateSchemaSectionText(octothorpes, name, isRequired, schema, subSch
 	var schemaType = getActualType(schema, subSchemas)
 
 	var text = [
-		generateElementTitle(octothorpes, name, schemaType, isRequired, schema.example),
+		generateElementTitle(octothorpes, name, schemaType, isRequired, schema.enum, schema.example),
 		schema.description
 	]
 	if (schemaType === 'object') {
@@ -70,23 +76,51 @@ function generateSchemaSectionText(octothorpes, name, isRequired, schema, subSch
 		if (!itemsType && schema.items['$ref']) {
 			itemsType = getActualType(schema.items, subSchemas)
 		}
-		text.push('The object is an array with all elements of the type `' + itemsType + '`.')
+		if(itemsType && name) {
+			text.push('The object is an array with all elements of the type `' + itemsType + '`.')
+		}
+		else if (itemsType) {
+			text.push('The schema defines an array with all elements of the type `' + itemsType + '`.')
+		}
+		else {
+			var validationItems = []
+			if (schema.items.allOf) {
+				text.push('The elements of the array must match *all* of the following properties:')
+				validationItems = schema.items.allOf
+			} else if (schema.items.anyOf) {
+				text.push('The elements of the array must match *at least one* of the following properties:')
+				validationItems = schema.items.anyOf
+			} else if (schema.items.oneOf) {
+				text.push('The elements of the array must match *exactly one* of the following properties:')
+				validationItems = schema.items.oneOf
+			} else if (schema.items.not) {
+				text.push('The elements of the array must *not* match the following properties:')
+				validationItems = schema.items.not
+			}
+			if (validationItems.length > 0) {
+				validationItems.forEach(function(item) {
+					text = text.concat(generateSchemaSectionText(octothorpes, undefined, false, item, subSchemas))
+				})
+			}
+		}
 		if (itemsType === 'object') {
 			text.push('The array object has the following properties:')
 			generatePropertySection(octothorpes, schema.items, subSchemas).forEach(function(section) {
 				text = text.concat(section)
 			})
 		}
-	} else if (schemaType === 'enum') {
-		text.push('The object is an enum, with one of the following required values:')
-		text.push(schema.enum.map(function(enumItem) {
-			return '* `' + enumItem + '`'
-		}).join('\n'))
 	} else if (schema.oneOf) {
 		text.push('The object must be one of the following types:')
 		text.push(schema.oneOf.map(function(oneOf) {
 			return '* `' + subSchemas[oneOf['$ref']] + '`'
 		}).join('\n'))
+	}
+
+	if(schema.enum) {
+		text.push('This element must be one of the following enum values:');
+		text.push(schema.enum.map(function(enumItem) {
+			return '* `' + enumItem + '`'
+		}).join('\n'));
 	}
 
 	if (schema.default !== undefined) {
@@ -129,14 +163,12 @@ function getActualType(schema, subSchemas) {
 		return schema.type
 	} else if (schema['$ref'] && subSchemas[schema['$ref']]) {
 		return subSchemas[schema['$ref']]
-	} else if (schema.enum) {
-		return 'enum'
 	} else {
 		return undefined
 	}
 }
 
-module.exports = function(schema) {
+module.exports = function(schema, startOcto) {
 	var subSchemaTypes = Object.keys(schema.definitions || {}).reduce(function(map, subSchemaTypeName) {
 		map['#/definitions/' + subSchemaTypeName] = subSchemaTypeName
 		return map
@@ -144,21 +176,26 @@ module.exports = function(schema) {
 
 	var text = []
 	var octothorpes = ''
+	if(startOcto) {
+		octothorpes = startOcto;
+	}
 
 	if (schema.title) {
 		octothorpes += '#'
 		text.push(octothorpes + ' ' + schema.title)
 	}
-	if (schema.description) {
-		text.push(schema.description)
-	}
 
 	if (schema.type === 'object') {
+		if (schema.description) {
+			text.push(schema.description)
+		}
 		text.push('The schema defines the following properties:')
 		generatePropertySection(octothorpes, schema, subSchemaTypes).forEach(function(section) {
 			text = text.concat(section)
 		})
-	} else if (schema.type === 'array') {}
+	} else {
+		text = text.concat(generateSchemaSectionText('#' + octothorpes, undefined, false, schema, subSchemaTypes));
+	}
 
 	if (schema.definitions) {
 		text.push('---')
