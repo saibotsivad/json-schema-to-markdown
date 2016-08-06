@@ -5,7 +5,7 @@
 	"type": "object",
 	"properties": {
 		"numbersOrStrings" :{
-			"description": "A flexible limited list",
+			"description": "A flexible limited list.",
 			"type": "array",
 			"items": {
 				"oneOf": [

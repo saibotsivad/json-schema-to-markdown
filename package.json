@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/tobiaslabs/json-schema-to-markdown",
   "devDependencies": {
+    "is-my-json-valid": "^2.13.1",
     "tape": "^4.0.0"
   }
 }
