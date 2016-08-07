@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tobiaslabs/json-schema-to-markdown.git"
+    "url": "https://github.com/saibotsivad/json-schema-to-markdown.git"
   },
   "keywords": [
     "json-schema",
@@ -17,9 +17,9 @@
   "author": "saibotsivad",
   "license": "VOL",
   "bugs": {
-    "url": "https://github.com/tobiaslabs/json-schema-to-markdown/issues"
+    "url": "https://github.com/saibotsivad/json-schema-to-markdown/issues"
   },
-  "homepage": "https://github.com/tobiaslabs/json-schema-to-markdown",
+  "homepage": "https://github.com/saibotsivad/json-schema-to-markdown",
   "devDependencies": {
     "is-my-json-valid": "^2.13.1",
     "tape": "^4.0.0"
