@@ -9,7 +9,7 @@ This object has the following properties:
 
 A flexible limited list.
 
-The elements of the array must match *exactly one* of the following properties:
+The elements of this array must match *exactly one* of the following properties:
 
 ### (number)
 

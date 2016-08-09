@@ -27,6 +27,8 @@ function renderSchema(schema, name, octothorpes, isRequired) {
 		text.push(schema.enum.map(function(enumItem) {
 			return '* `' + enumItem + '`'
 		}).join('\n'));
+	} else {
+		text = text.concat(renderItemsValidation(schema, 'item', octothorpes))
 	}
 
 	var restrictions = Validation.render(schema)
@@ -72,26 +74,26 @@ function renderArraySchema(schema, name, octothorpes) {
 		text.push('All array elements should be of type:')
 		text = text.concat(renderSchema(schema.items, undefined, '#' + octothorpes))
 	} else if (schema.items) {
-		text = text.concat(renderItemsValidation(schema, octothorpes))
+		text = text.concat(renderItemsValidation(schema.items, 'array', octothorpes))
 	}
 	return text
 }
 
-function renderItemsValidation(schema, octothorpes) {
+function renderItemsValidation(schema, type, octothorpes) {
 	var text = []
 	var validationItems = []
-	if (schema.items.allOf) {
-		text.push('The elements of the array must match *all* of the following properties:')
-		validationItems = schema.items.allOf
-	} else if (schema.items.anyOf) {
-		text.push('The elements of the array must match *at least one* of the following properties:')
-		validationItems = schema.items.anyOf
-	} else if (schema.items.oneOf) {
-		text.push('The elements of the array must match *exactly one* of the following properties:')
-		validationItems = schema.items.oneOf
-	} else if (schema.items.not) {
-		text.push('The elements of the array must *not* match the following properties:')
-		validationItems = schema.items.not
+	if (schema.allOf) {
+		text.push('The elements of this ' + type + ' must match *all* of the following properties:')
+		validationItems = schema.allOf
+	} else if (schema.anyOf) {
+		text.push('The elements of this ' + type + ' must match *at least one* of the following properties:')
+		validationItems = schema.anyOf
+	} else if (schema.oneOf) {
+		text.push('The elements of this ' + type + ' must match *exactly one* of the following properties:')
+		validationItems = schema.oneOf
+	} else if (schema.not) {
+		text.push('The elements of this ' + type + ' must *not* match the following properties:')
+		validationItems = schema.not
 	}
 	if (validationItems.length > 0) {
 		validationItems.forEach(function(item) {

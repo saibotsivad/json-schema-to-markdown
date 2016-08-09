@@ -1,8 +1,9 @@
 # Example Schema
+`(object)`
 
 This schema is awesome.
 
-The schema defines the following properties:
+This object has the following properties:
 
 ## `pants` (pants)
 
@@ -18,7 +19,7 @@ The schema defines the following additional types:
 
 Some pants.
 
-Properties of the `pants` object:
+The `pants` object has the following properties:
 
 ### `color` (string, enum, required)
 

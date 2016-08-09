@@ -31,7 +31,6 @@ function renderTitle(schema, name, octothorpes, isRequired) {
 		if (schema.title) {
 			text.push('`')
 		}
-		//text.push('');
 	} else if (schema['$ref']) {
 		text.push('(' + schema['$ref'].substr(14) + ')')
 	}
