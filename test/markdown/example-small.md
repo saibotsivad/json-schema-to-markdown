@@ -1,4 +1,5 @@
 # Example Schema
+`(object)`
 
 > ### Example JSON:
 
@@ -12,7 +13,7 @@
 
 This schema is awesome.
 
-The schema defines the following properties:
+This object has the following properties:
 
 ## `aNumber` (number)
 

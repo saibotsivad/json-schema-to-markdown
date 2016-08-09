@@ -1,5 +1,4 @@
 # Example Schema
-
-## (null)
+`(null)`
 
 This schema is awesome.

@@ -1,7 +1,9 @@
+# (object)
+
 This schema is awesome.
 
-The schema defines the following properties:
+This object has the following properties:
 
-# `price` (number)
+## `price` (number)
 
 Cost of the product.

@@ -1,8 +1,9 @@
 # Example Schema
+`(object)`
 
 This schema is awesome.
 
-The schema defines the following properties:
+This object has the following properties:
 
 ## `price` (number)
 
@@ -17,7 +18,9 @@ Additional restrictions:
 
 Any kind of color.
 
-The object is an array with all elements of the type `string`.
+All array elements should be of type:
+
+### (string)
 
 Additional restrictions:
 
