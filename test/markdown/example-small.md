@@ -1,7 +1,7 @@
 # Example Schema
 `(object)`
 
-> ### Example JSON:
+> ### Example JSON for "Example Schema":
 
 ```json
 {

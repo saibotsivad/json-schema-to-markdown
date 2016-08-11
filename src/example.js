@@ -16,7 +16,9 @@ module.exports = {
 		var text = '';
 		opt = opt ? opt : this.options
 		if (schema.example) {
-			text = text.concat(opt.pre + '#'.repeat(opt.octothorpe) + ' Example JSON:\n\n```json\n')
+			text = text.concat(opt.pre + '#'.repeat(opt.octothorpe) + ' Example JSON')
+			text = schema.title ? text.concat(' for "' + schema.title + '"') : text.concat('')
+			text = text.concat(':\n\n```json\n')
 			text = text.concat(JSON.stringify(schema.example, null, opt.space))
 			text = text.concat('\n```\n')
 		}
