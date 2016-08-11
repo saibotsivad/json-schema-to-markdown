@@ -54,7 +54,7 @@ function renderSchema(schema, name, octothorpes, isRequired) {
 		text.push('This element must be one of the following enum values:')
 		text.push(schema.enum.map(function(enumItem) {
 			return '* `' + enumItem + '`'
-		}).join('\n'));
+		}).join('\n'))
 	} else {
 		text = text.concat(renderItemsValidation(schema, 'item', octothorpes))
 	}
@@ -70,7 +70,7 @@ function renderSchema(schema, name, octothorpes, isRequired) {
 
 function renderObjectSchema(schema, name, octothorpes) {
 	var text = []
-	if(schema.properties) {
+	if (schema.properties) {
 		if (name) {
 			text.push('The `' + name + '` object has the following properties:')
 		} else {

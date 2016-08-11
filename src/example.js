@@ -13,7 +13,7 @@ module.exports = {
 		space: 2
 	},
 	renderExample: function(schema, opt) {
-		var text = '';
+		var text = ''
 		opt = opt ? opt : this.options
 		if (schema.example) {
 			text = text.concat(opt.pre + '#'.repeat(opt.octothorpe) + ' Example JSON')

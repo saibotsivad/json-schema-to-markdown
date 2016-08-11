@@ -18,15 +18,15 @@ function renderTitle(schema, name, octothorpes, isRequired) {
 		if (schema.title) {
 			text.push('`')
 		}
-		text.push('(');
-		text.push(schema.type);
+		text.push('(')
+		text.push(schema.type)
 		if (schema.enum) {
 			text.push(', enum')
 		}
 		if (isRequired) {
 			text.push(', required')
 		}
-		text.push(')');
+		text.push(')')
 		if (schema.title) {
 			text.push('`')
 		}
