@@ -1,5 +1,8 @@
 /*
- * TODO info
+ * Renders validation restrictions that are specific to certain schema types
+ *
+ * There should be no overlap, so no harm done in rendering them all together.
+ * The type independent validatiosn (e.g. enum, oneOf, etc) are done in schema.js
  */
 module.exports = {
 	render: function(schema) {
@@ -29,7 +32,6 @@ function generatePropertyRestrictions(schema) {
 		generate('maxProperties', 'Maximum number of properties'),
 		generate('minProperties', 'Minimum number of properties')
 		// FIXME required? additionalProperties? patternProperties?
-		// TODO for any instance type: enum, allOf, etc.
 	].filter(function(text) {
 		return text
 	}).join('\n')

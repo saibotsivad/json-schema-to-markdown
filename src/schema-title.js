@@ -1,5 +1,5 @@
 /*
- * TODO info
+ * Renders the titles for each schema
  */
 module.exports = {
 	render: function(schema, name, octothorpes, isRequired) {
@@ -26,7 +26,6 @@ function renderTitle(schema, name, octothorpes, isRequired) {
 		if (isRequired) {
 			text.push(', required')
 		}
-		// TODO readOnly
 		text.push(')');
 		if (schema.title) {
 			text.push('`')

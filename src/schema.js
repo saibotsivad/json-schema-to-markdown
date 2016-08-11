@@ -1,5 +1,23 @@
 /*
- * TODO info
+ * Renders JSON schemas into Markdown
+ * These can be top-level schema or definitions inside a top-level schema
+ *
+ * Currently the `name` and `octothorpes` are passed around.
+ *
+ * Generally a schema has a `name` when it is inside another definition and
+ * therefore will not define a `title`.
+ *
+ * Ideas for improvement:
+ *
+ * * Don't pass `octothorpes` around but instead a number
+ *   This would mean we can do something about > level 6 headings
+ *   Currently this just leads to 7 '#'s which is invalid Markdown
+ *
+ * * Allow greater control over rendering
+ *   e.g. You might want all examples rendered "inline", or different number of
+ *   spaces
+ *   We should have a top-level options passed to the renderSchema function
+ *
  */
 var SchemaTitle = require('./schema-title.js')
 var Example = require('./example.js')
