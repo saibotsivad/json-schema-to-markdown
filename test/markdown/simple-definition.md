@@ -9,6 +9,10 @@ This object has the following properties:
 
 The kind of pants.
 
+## `many_pants` (array)
+
+All array elements must be of the type defined by `pants`
+
 ---
 
 # Sub Schemas

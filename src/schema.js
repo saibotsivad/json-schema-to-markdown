@@ -88,9 +88,9 @@ function renderArraySchema(schema, name, octothorpes) {
 	var text = []
 
 	if (schema.items['$ref']) {
-		// TODO ['$ref']
+		text.push('All array elements must be of the type defined by `' + schema.items['$ref'].substr(14) +'`')
 	} else if (schema.items && schema.items.type) {
-		text.push('All array elements should be of type:')
+		text.push('All array elements must be of type:')
 		text = text.concat(renderSchema(schema.items, undefined, '#' + octothorpes))
 	} else if (schema.items) {
 		text = text.concat(renderItemsValidation(schema.items, 'array', octothorpes))

@@ -9,7 +9,7 @@ This object has the following properties:
 
 Cool words.
 
-All array elements should be of type:
+All array elements must be of type:
 
 ### (string)
 
@@ -17,7 +17,7 @@ All array elements should be of type:
 
 Cool names.
 
-All array elements should be of type:
+All array elements must be of type:
 
 ### (object)
 

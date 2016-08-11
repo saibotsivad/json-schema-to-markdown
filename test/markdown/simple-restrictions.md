@@ -18,7 +18,7 @@ Additional restrictions:
 
 Any kind of color.
 
-All array elements should be of type:
+All array elements must be of type:
 
 ### (string)
 
