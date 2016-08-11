@@ -27,12 +27,7 @@ Default: `true`
 
 Lists of the available styles of the product.
 
-All array elements should be of type:
-
-### (string)
-
 Default:
-
 ```
 [
   "plain",
@@ -41,12 +36,15 @@ Default:
 ]
 ```
 
+All array elements should be of type:
+
+### (string)
+
 ## `washingRecommendation` (object)
 
 Washing recommendations.
 
 Default:
-
 ```
 {
   "temperature": "Wash at or below 60°C"

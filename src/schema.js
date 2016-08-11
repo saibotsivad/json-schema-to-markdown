@@ -18,6 +18,16 @@ function renderSchema(schema, name, octothorpes, isRequired) {
 		schema.description
 	]
 
+	if (schema.default !== undefined) {
+		if (schema.default === null
+			|| [ "boolean", "number", "string" ].indexOf(typeof schema.default) !== -1
+		) {
+			text.push('Default: `' + JSON.stringify(schema.default) + '`')
+		} else {
+			text.push('Default:\n```\n' + JSON.stringify(schema.default, null, 2) + '\n```')
+		}
+	}
+
 	if (schema.type == 'object') {
 		text = text.concat(renderObjectSchema(schema, name, octothorpes))
 	} else if (schema.type == 'array') {
@@ -35,15 +45,6 @@ function renderSchema(schema, name, octothorpes, isRequired) {
 	if (restrictions) {
 		text.push('Additional restrictions:')
 		text.push(restrictions)
-	}
-
-	if (schema.default !== undefined) {
-		if (schema.default === null || [ "boolean", "number", "string" ].indexOf(typeof schema.default) !== -1) {
-			text.push('Default: `' + JSON.stringify(schema.default) + '`')
-		} else {
-			text.push('Default:')
-			text.push('```\n' + JSON.stringify(schema.default, null, 2) + '\n```')
-		}
 	}
 
 	return text
