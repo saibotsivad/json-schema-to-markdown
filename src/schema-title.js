@@ -26,6 +26,9 @@ function renderTitle(schema, name, octothorpes, isRequired) {
 		if (isRequired) {
 			text.push(', required')
 		}
+		if (schema.readOnly) {
+			text.push(', read only')
+		}
 		text.push(')')
 		if (schema.title) {
 			text.push('`')
