@@ -8,7 +8,7 @@ module.exports = {
 }
 
 function renderTitle(schema, name, octothorpes, isRequired) {
-	var text = [ octothorpes, ' ' ]
+	var text = octothorpes.length > 5 ? [ '#####', ' ' ] : [ octothorpes, ' ' ]
 	if (name) {
 		text.push('`' + name + '` ')
 	} else if (schema.title) {
