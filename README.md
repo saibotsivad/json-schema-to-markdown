@@ -1,5 +1,7 @@
 # json-schema-to-markdown
 
+*This is a Scrive clone of [json-schema-to-markdown](https://github.com/saibotsivad/json-schema-to-markdown) and is not the the same as the package on NPM.*
+
 This module turns a [JSON Schema](http://json-schema.org/) into a
 human-readable markdown file.
 
@@ -10,7 +12,8 @@ are also very welcome.
 
 # using
 
-Install the normal way: `npm install json-schema-to-markdown`
+Install the "normal" way: `npm install
+https://github.com/scrive/json-schema-to-markdown.git`
 
 Use it like this:
 
@@ -20,40 +23,4 @@ var schema = // An object that is a valid JSON Schema
 var markdown = parse(schema)
 ```
 
-There are plenty of examples in the [test folder](./test), but a very
-simple example would be as follows:
-
-For a JSON file like this:
-
-```json
-{
-	"$schema": "http://json-schema.org/draft-04/schema#",
-	"title": "Example Schema",
-	"description": "This schema is awesome.",
-	"type": "object",
-	"properties": {
-		"price": {
-			"description": "Cost of the product.",
-			"type": "number"
-		}
-	}
-}
-```
-
-The output would be:
-
-```markdown
-# Example Schema
-
-This schema is awesome.
-
-The schema defines the following properties:
-
-## `price` (number)
-
-Cost of the product.
-```
-
-# license
-
-[VOL](http://veryopenlicense.com)
+There are plenty of examples in the [test folder](./test).
