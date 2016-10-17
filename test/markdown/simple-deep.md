@@ -29,6 +29,6 @@ Fourth level.
 
 The `thing` object has the following properties:
 
-###### `thing` (string)
+##### `thing` (string)
 
 Fifth level.
