@@ -1,0 +1,18 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "Example Schema",
+	"description": "This schema is awesome.",
+	"type": "object",
+	"properties": {
+		"aNumber": {
+			"type": "number"
+		},
+		"aString": {
+			"type": "string"
+		}
+	},
+	"example": {
+		"aNumber": 3.2,
+		"aString": "awesome"
+	}
+}

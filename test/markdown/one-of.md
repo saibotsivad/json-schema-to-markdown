@@ -1,17 +1,19 @@
 # Example Schema
+`(object)`
 
 This schema is awesome.
 
-The schema defines the following properties:
+This object has the following properties:
 
-## `lower`
+## `lower` 
 
 Lower clothing.
 
-The object must be one of the following types:
+The elements of this item must match *exactly one* of the following properties:
 
-* `pants`
-* `shorts`
+### (pants)
+
+### (shorts)
 
 ---
 

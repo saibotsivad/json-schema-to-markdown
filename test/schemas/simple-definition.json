@@ -7,6 +7,12 @@
 		"pants": {
 			"description": "The kind of pants.",
 			"$ref": "#/definitions/pants"
+		},
+		"many_pants": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/pants"
+			}
 		}
 	},
 	"definitions": {

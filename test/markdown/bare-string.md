@@ -1,5 +1,4 @@
 # Example Schema
-
-## (string)
+`(string)`
 
 This schema is awesome.

@@ -23,7 +23,8 @@ var testGoodFiles = [
 	'one-of',
 	'items-one-of',
 	'examples',
-	"default-properties"
+	'example-small',
+	'default-properties'
 ]
 
 test('Internal test that invalid JSON schemas are an error', function(t) {

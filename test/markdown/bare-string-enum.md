@@ -1,6 +1,5 @@
 # Example Schema
-
-## (string, enum)
+`(string, enum)`
 
 This schema is awesome.
 

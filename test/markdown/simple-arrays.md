@@ -1,27 +1,32 @@
 # Example Schema
+`(object)`
 
 This schema is awesome.
 
-The schema defines the following properties:
+This object has the following properties:
 
 ## `words` (array)
 
 Cool words.
 
-The object is an array with all elements of the type `string`.
+All array elements must be of type:
+
+### (string)
 
 ## `names` (array)
 
 Cool names.
 
-The object is an array with all elements of the type `object`.
+All array elements must be of type:
 
-The array object has the following properties:
+### (object)
 
-### `first` (string)
+This object has the following properties:
+
+#### `first` (string)
 
 First name
 
-### `last` (string)
+#### `last` (string)
 
 Last name.

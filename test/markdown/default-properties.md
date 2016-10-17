@@ -1,8 +1,9 @@
 # Example Schema
+`(object)`
 
 This schema is awesome.
 
-The schema defines the following properties:
+This object has the following properties:
 
 ## `price` (number)
 
@@ -26,10 +27,7 @@ Default: `true`
 
 Lists of the available styles of the product.
 
-The object is an array with all elements of the type `string`.
-
 Default:
-
 ```
 [
   "plain",
@@ -38,12 +36,15 @@ Default:
 ]
 ```
 
+All array elements must be of type:
+
+### (string)
+
 ## `washingRecommendation` (object)
 
 Washing recommendations.
 
 Default:
-
 ```
 {
   "temperature": "Wash at or below 60°C"

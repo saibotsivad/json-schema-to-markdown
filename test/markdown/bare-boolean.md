@@ -1,5 +1,4 @@
 # Example Schema
-
-## (boolean)
+`(boolean)`
 
 This schema is awesome.
