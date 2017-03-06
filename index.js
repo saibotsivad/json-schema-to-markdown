@@ -72,7 +72,7 @@ function generateSchemaSectionText(octothorpes, name, isRequired, schema, subSch
 		}
         if (schema.patternProperties) {
             text.push('Pattern properties of the `' + name + '` object pattern regexp:')
-            generatePropertySection(octothorpes, schema, subSchemas).forEach(function(section) {
+            generatePropertySection(octothorpes, schema, subSchemas, true).forEach(function(section) {
                 text = text.concat(section)
             })
         }
@@ -150,17 +150,18 @@ function generateSchemaSectionText(octothorpes, name, isRequired, schema, subSch
 	return text
 }
 
-function generatePropertySection(octothorpes, schema, subSchemas) {
-	if (schema.properties) {
-		return Object.keys(schema.properties).map(function(propertyKey) {
-			var propertyIsRequired = schema.required && schema.required.indexOf(propertyKey) >= 0
-			return generateSchemaSectionText(octothorpes + '#', propertyKey, propertyIsRequired, schema.properties[propertyKey], subSchemas)
-		})
-    } else if (schema.patternProperties) {
+function generatePropertySection(octothorpes, schema, subSchemas, isPatternProperties) {
+	if (isPatternProperties) {
         return Object.keys(schema.patternProperties).map(function(patternPropertyKey) {
             var patternPropertyIsRequired = schema.required && schema.required.indexOf(patternPropertyKey) >= 0
             return generateSchemaSectionText(octothorpes + '#', patternPropertyKey, patternPropertyIsRequired, schema.patternProperties[patternPropertyKey], subSchemas)
         })
+	}
+	else if (schema.properties) {
+		return Object.keys(schema.properties).map(function(propertyKey) {
+			var propertyIsRequired = schema.required && schema.required.indexOf(propertyKey) >= 0
+			return generateSchemaSectionText(octothorpes + '#', propertyKey, propertyIsRequired, schema.properties[propertyKey], subSchemas)
+		})
 	} else if (schema.oneOf) {
 		var oneOfList = schema.oneOf.map(function(innerSchema) {
 
