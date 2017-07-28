@@ -1,5 +1,7 @@
 # json-schema-to-markdown
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/saibotsivad/json-schema-to-markdown.svg)](https://greenkeeper.io/)
+
 This module turns a [JSON Schema](http://json-schema.org/) into a
 human-readable markdown file.
 
