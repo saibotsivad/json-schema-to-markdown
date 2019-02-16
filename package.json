@@ -4,6 +4,7 @@
   "description": "Turn a JSON Schema into a markdown file.",
   "main": "index.js",
   "scripts": {
+    "commit": "git-cz",
     "test": "tape test/*.js"
   },
   "repository": {
@@ -21,7 +22,14 @@
   },
   "homepage": "https://github.com/saibotsivad/json-schema-to-markdown",
   "devDependencies": {
-    "is-my-json-valid": "^2.13.1",
-    "tape": "^4.0.0"
+    "commitizen": "^3.0.5",
+    "cz-conventional-changelog": "^2.1.0",
+    "is-my-json-valid": "^2.19.0",
+    "tape": "^4.10.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
