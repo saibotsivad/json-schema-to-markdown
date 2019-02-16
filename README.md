@@ -56,4 +56,4 @@ Cost of the product.
 
 # license
 
-[VOL](http://veryopenlicense.com)
+Published and released under the [VOL](http://veryopenlicense.com).
