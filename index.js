@@ -100,7 +100,7 @@ function generateSchemaSectionText(octothorpes, name, isRequired, schema, subSch
 
 			if (validationItems.length > 0) {
 				validationItems.forEach(function(item) {
-					text = text.concat(generateSchemaSectionText(octothorpes, undefined, false, item, subSchemas))
+					text = text.concat(generateSchemaSectionText(octothorpes, item.title, false, item, subSchemas))
 				})
 			}
 		}
