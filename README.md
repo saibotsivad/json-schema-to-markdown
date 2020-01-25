@@ -12,7 +12,7 @@ are also very welcome.
 
 Install the normal way: `npm install json-schema-to-markdown`
 
-or if using cli, install globally: `npm install -g json-schema-to-markdwon`
+or if using cli, install globally: `npm install -g json-schema-to-markdown`
 
 Use it like this:
 
