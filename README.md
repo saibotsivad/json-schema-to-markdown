@@ -12,6 +12,8 @@ are also very welcome.
 
 Install the normal way: `npm install json-schema-to-markdown`
 
+or if using cli, install globally: `npm install -g json-schema-to-markdown`
+
 Use it like this:
 
 ```js
@@ -19,6 +21,22 @@ var parse = require('json-schema-to-markdown')
 var schema = // An object that is a valid JSON Schema
 var markdown = parse(schema)
 ```
+
+### CLI
+
+`json2md /path/to/schema_file.json`
+
+**NOTE: input file must end with .json**
+
+or
+
+`cat /path/to/schema_file.json | json2md`
+
+default output is to stdout but you may specify an output file
+
+`json2md /path/to/schema_file.json /path/to/output.md`
+
+**NOTE: output file must end with .md**
 
 There are plenty of examples in the [test folder](./test), but a very
 simple example would be as follows:
