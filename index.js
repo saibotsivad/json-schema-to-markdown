@@ -37,6 +37,8 @@ function generatePropertyRestrictions(schema) {
 	return [
 		generate('minimum', 'Minimum'),
 		generate('maximum', 'Maximum'),
+		generate('exclusiveMinimum', 'Exclusive minimum'),
+		generate('exclusiveMaximum', 'Exclusive maximum'),
 		generate('pattern', 'Regex pattern'),
 		generate('minItems', 'Minimum items'),
 		generate('uniqueItems', 'Unique items')
