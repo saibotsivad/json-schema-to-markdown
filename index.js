@@ -47,7 +47,7 @@ function generatePropertyRestrictions(schema) {
 
 function generateSinglePropertyRestriction(schema) {
 	return function(key, text) {
-		if (schema.key !== undefined) {
+		if (schema[key] !== undefined) {
 			return '* ' + text + ': `' + schema[key] + '`'
 		} else {
 			return null
