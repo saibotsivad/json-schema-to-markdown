@@ -105,6 +105,13 @@ function generateSchemaSectionText(octothorpes, name, isRequired, schema, subSch
 			}
 		}
 
+		if (schema.items && schema.items.enum) {
+			text.push('Each element of the array must be one of the following enum values:');
+			text.push(schema.items.enum.map(function(enumItem) {
+				return '* `' + enumItem + '`'
+			}).join('\n'))
+		}
+
 		if (itemsType === 'object') {
 			text.push('The array object has the following properties:')
 			generatePropertySection(octothorpes, schema.items, subSchemas).forEach(function(section) {
