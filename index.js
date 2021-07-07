@@ -27,7 +27,7 @@ function generateElementTitle(octothorpes, elementName, elementType, isRequired,
 		text.push(')')
 	}
 	if (example) {
-		text.push(' eg: `' + example + '`')
+		text.push(' e.g.: `' + example + '`')
 	}
 	return text.join('')
 }
@@ -139,6 +139,13 @@ function generateSchemaSectionText(octothorpes, name, isRequired, schema, subSch
 			text.push('Default:')
 			text.push('```\n' + JSON.stringify(schema.default, null, 2) + '\n```')
 		}
+	}
+
+	if (schema.examples !== undefined || schema.example !== undefined) {
+		const examples = schema.examples || []
+		if (schema.example) examples.push(schema.example)
+		text.push(((examples.length > 1) ? 'Examples: ' : 'Example: ')
+			+ examples.map(x => '`' + JSON.stringify(x) + '`').join(', '))
 	}
 
 	var restrictions = generatePropertyRestrictions(schema)
