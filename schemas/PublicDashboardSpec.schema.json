@@ -1,0 +1,1481 @@
+{
+  "description": "Glean schema to represent dashboards.",
+  "type": "object",
+  "properties": {
+    "glean": {
+      "description": "The Glean file format version.",
+      "type": "string",
+      "enum": [
+        "1.0"
+      ]
+    },
+    "grn": {
+      "description": "The persistent identifier for this dashboard.",
+      "type": "string"
+    },
+    "name": {
+      "description": "The user-visible name of this dashboard.",
+      "type": "string"
+    },
+    "description": {
+      "description": "The user-visible description for this dashboard.",
+      "type": "string"
+    },
+    "type": {
+      "description": "The type of this resource, which in this case should always be \"dashboard\".",
+      "type": "string",
+      "enum": [
+        "dashboard"
+      ]
+    },
+    "globalFilters": {
+      "description": "Specifies filters that are applied to all dashboard blocks.",
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "columnId": {
+                "type": "string"
+              },
+              "dataModel": {
+                "description": "Filepath or GRN of the model definition which contains the column being filtered.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "columnId",
+              "dataModel"
+            ]
+          },
+          {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "gt": {
+                "type": [
+                  "null",
+                  "string",
+                  "number"
+                ]
+              },
+              "columnId": {
+                "type": "string"
+              },
+              "dataModel": {
+                "description": "Filepath or GRN of the model definition which contains the column being filtered.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "columnId",
+              "dataModel",
+              "gt"
+            ]
+          },
+          {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "gte": {
+                "anyOf": [
+                  {
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "enum": [
+                          "day",
+                          "hour",
+                          "minute",
+                          "month",
+                          "week",
+                          "year"
+                        ],
+                        "type": "string"
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "startOfPeriod": {
+                            "type": "boolean"
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 3
+                  },
+                  {
+                    "type": [
+                      "null",
+                      "string",
+                      "number"
+                    ]
+                  }
+                ]
+              },
+              "columnId": {
+                "type": "string"
+              },
+              "dataModel": {
+                "description": "Filepath or GRN of the model definition which contains the column being filtered.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "columnId",
+              "dataModel",
+              "gte"
+            ]
+          },
+          {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "lt": {
+                "anyOf": [
+                  {
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "enum": [
+                          "day",
+                          "hour",
+                          "minute",
+                          "month",
+                          "week",
+                          "year"
+                        ],
+                        "type": "string"
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "startOfPeriod": {
+                            "type": "boolean"
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 3
+                  },
+                  {
+                    "type": [
+                      "null",
+                      "string",
+                      "number"
+                    ]
+                  }
+                ]
+              },
+              "columnId": {
+                "type": "string"
+              },
+              "dataModel": {
+                "description": "Filepath or GRN of the model definition which contains the column being filtered.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "columnId",
+              "dataModel",
+              "lt"
+            ]
+          },
+          {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "lte": {
+                "type": [
+                  "null",
+                  "string",
+                  "number"
+                ]
+              },
+              "columnId": {
+                "type": "string"
+              },
+              "dataModel": {
+                "description": "Filepath or GRN of the model definition which contains the column being filtered.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "columnId",
+              "dataModel",
+              "lte"
+            ]
+          },
+          {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "contains": {
+                "type": "string"
+              },
+              "columnId": {
+                "type": "string"
+              },
+              "dataModel": {
+                "description": "Filepath or GRN of the model definition which contains the column being filtered.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "columnId",
+              "contains",
+              "dataModel"
+            ]
+          },
+          {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "range": {
+                "anyOf": [
+                  {
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "string"
+                      }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  {
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  {
+                    "type": "array",
+                    "items": [
+                      {
+                        "anyOf": [
+                          {
+                            "type": "array",
+                            "items": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "enum": [
+                                  "day",
+                                  "hour",
+                                  "minute",
+                                  "month",
+                                  "week",
+                                  "year"
+                                ],
+                                "type": "string"
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "startOfPeriod": {
+                                    "type": "boolean"
+                                  }
+                                },
+                                "additionalProperties": false
+                              }
+                            ],
+                            "minItems": 2,
+                            "maxItems": 3
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      {
+                        "anyOf": [
+                          {
+                            "type": "array",
+                            "items": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "enum": [
+                                  "day",
+                                  "hour",
+                                  "minute",
+                                  "month",
+                                  "week",
+                                  "year"
+                                ],
+                                "type": "string"
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "startOfPeriod": {
+                                    "type": "boolean"
+                                  }
+                                },
+                                "additionalProperties": false
+                              }
+                            ],
+                            "minItems": 2,
+                            "maxItems": 3
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
+                      }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                  }
+                ]
+              },
+              "columnId": {
+                "type": "string"
+              },
+              "dataModel": {
+                "description": "Filepath or GRN of the model definition which contains the column being filtered.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "columnId",
+              "dataModel",
+              "range"
+            ]
+          },
+          {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "values": {
+                "anyOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": [
+                        "null",
+                        "number"
+                      ]
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": [
+                        "null",
+                        "boolean"
+                      ]
+                    }
+                  }
+                ]
+              },
+              "columnId": {
+                "type": "string"
+              },
+              "dataModel": {
+                "description": "Filepath or GRN of the model definition which contains the column being filtered.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "columnId",
+              "dataModel",
+              "values"
+            ]
+          },
+          {
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+              "excludeValues": {
+                "anyOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": [
+                        "null",
+                        "number"
+                      ]
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": [
+                        "null",
+                        "boolean"
+                      ]
+                    }
+                  }
+                ]
+              },
+              "columnId": {
+                "type": "string"
+              },
+              "dataModel": {
+                "description": "Filepath or GRN of the model definition which contains the column being filtered.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "columnId",
+              "dataModel",
+              "excludeValues"
+            ]
+          }
+        ]
+      }
+    },
+    "sections": {
+      "description": "Specifies the sections that belong to this dashboard",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "filters": {
+            "description": "Specifies filters that are applied to blocks in the section.",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "additionalProperties": false,
+                  "type": "object",
+                  "properties": {
+                    "columnId": {
+                      "type": "string"
+                    },
+                    "dataModel": {
+                      "description": "Filepath or GRN of the model definition which contains the column being filtered.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "columnId",
+                    "dataModel"
+                  ]
+                },
+                {
+                  "additionalProperties": false,
+                  "type": "object",
+                  "properties": {
+                    "gt": {
+                      "type": [
+                        "null",
+                        "string",
+                        "number"
+                      ]
+                    },
+                    "columnId": {
+                      "type": "string"
+                    },
+                    "dataModel": {
+                      "description": "Filepath or GRN of the model definition which contains the column being filtered.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "columnId",
+                    "dataModel",
+                    "gt"
+                  ]
+                },
+                {
+                  "additionalProperties": false,
+                  "type": "object",
+                  "properties": {
+                    "gte": {
+                      "anyOf": [
+                        {
+                          "type": "array",
+                          "items": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "enum": [
+                                "day",
+                                "hour",
+                                "minute",
+                                "month",
+                                "week",
+                                "year"
+                              ],
+                              "type": "string"
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "startOfPeriod": {
+                                  "type": "boolean"
+                                }
+                              },
+                              "additionalProperties": false
+                            }
+                          ],
+                          "minItems": 2,
+                          "maxItems": 3
+                        },
+                        {
+                          "type": [
+                            "null",
+                            "string",
+                            "number"
+                          ]
+                        }
+                      ]
+                    },
+                    "columnId": {
+                      "type": "string"
+                    },
+                    "dataModel": {
+                      "description": "Filepath or GRN of the model definition which contains the column being filtered.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "columnId",
+                    "dataModel",
+                    "gte"
+                  ]
+                },
+                {
+                  "additionalProperties": false,
+                  "type": "object",
+                  "properties": {
+                    "lt": {
+                      "anyOf": [
+                        {
+                          "type": "array",
+                          "items": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "enum": [
+                                "day",
+                                "hour",
+                                "minute",
+                                "month",
+                                "week",
+                                "year"
+                              ],
+                              "type": "string"
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "startOfPeriod": {
+                                  "type": "boolean"
+                                }
+                              },
+                              "additionalProperties": false
+                            }
+                          ],
+                          "minItems": 2,
+                          "maxItems": 3
+                        },
+                        {
+                          "type": [
+                            "null",
+                            "string",
+                            "number"
+                          ]
+                        }
+                      ]
+                    },
+                    "columnId": {
+                      "type": "string"
+                    },
+                    "dataModel": {
+                      "description": "Filepath or GRN of the model definition which contains the column being filtered.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "columnId",
+                    "dataModel",
+                    "lt"
+                  ]
+                },
+                {
+                  "additionalProperties": false,
+                  "type": "object",
+                  "properties": {
+                    "lte": {
+                      "type": [
+                        "null",
+                        "string",
+                        "number"
+                      ]
+                    },
+                    "columnId": {
+                      "type": "string"
+                    },
+                    "dataModel": {
+                      "description": "Filepath or GRN of the model definition which contains the column being filtered.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "columnId",
+                    "dataModel",
+                    "lte"
+                  ]
+                },
+                {
+                  "additionalProperties": false,
+                  "type": "object",
+                  "properties": {
+                    "contains": {
+                      "type": "string"
+                    },
+                    "columnId": {
+                      "type": "string"
+                    },
+                    "dataModel": {
+                      "description": "Filepath or GRN of the model definition which contains the column being filtered.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "columnId",
+                    "contains",
+                    "dataModel"
+                  ]
+                },
+                {
+                  "additionalProperties": false,
+                  "type": "object",
+                  "properties": {
+                    "range": {
+                      "anyOf": [
+                        {
+                          "type": "array",
+                          "items": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ],
+                          "minItems": 2,
+                          "maxItems": 2
+                        },
+                        {
+                          "type": "array",
+                          "items": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "number"
+                            }
+                          ],
+                          "minItems": 2,
+                          "maxItems": 2
+                        },
+                        {
+                          "type": "array",
+                          "items": [
+                            {
+                              "anyOf": [
+                                {
+                                  "type": "array",
+                                  "items": [
+                                    {
+                                      "type": "number"
+                                    },
+                                    {
+                                      "enum": [
+                                        "day",
+                                        "hour",
+                                        "minute",
+                                        "month",
+                                        "week",
+                                        "year"
+                                      ],
+                                      "type": "string"
+                                    },
+                                    {
+                                      "type": "object",
+                                      "properties": {
+                                        "startOfPeriod": {
+                                          "type": "boolean"
+                                        }
+                                      },
+                                      "additionalProperties": false
+                                    }
+                                  ],
+                                  "minItems": 2,
+                                  "maxItems": 3
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            {
+                              "anyOf": [
+                                {
+                                  "type": "array",
+                                  "items": [
+                                    {
+                                      "type": "number"
+                                    },
+                                    {
+                                      "enum": [
+                                        "day",
+                                        "hour",
+                                        "minute",
+                                        "month",
+                                        "week",
+                                        "year"
+                                      ],
+                                      "type": "string"
+                                    },
+                                    {
+                                      "type": "object",
+                                      "properties": {
+                                        "startOfPeriod": {
+                                          "type": "boolean"
+                                        }
+                                      },
+                                      "additionalProperties": false
+                                    }
+                                  ],
+                                  "minItems": 2,
+                                  "maxItems": 3
+                                },
+                                {
+                                  "type": "string"
+                                }
+                              ]
+                            }
+                          ],
+                          "minItems": 2,
+                          "maxItems": 2
+                        }
+                      ]
+                    },
+                    "columnId": {
+                      "type": "string"
+                    },
+                    "dataModel": {
+                      "description": "Filepath or GRN of the model definition which contains the column being filtered.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "columnId",
+                    "dataModel",
+                    "range"
+                  ]
+                },
+                {
+                  "additionalProperties": false,
+                  "type": "object",
+                  "properties": {
+                    "values": {
+                      "anyOf": [
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          }
+                        },
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          }
+                        },
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": [
+                              "null",
+                              "boolean"
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    "columnId": {
+                      "type": "string"
+                    },
+                    "dataModel": {
+                      "description": "Filepath or GRN of the model definition which contains the column being filtered.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "columnId",
+                    "dataModel",
+                    "values"
+                  ]
+                },
+                {
+                  "additionalProperties": false,
+                  "type": "object",
+                  "properties": {
+                    "excludeValues": {
+                      "anyOf": [
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          }
+                        },
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          }
+                        },
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": [
+                              "null",
+                              "boolean"
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    "columnId": {
+                      "type": "string"
+                    },
+                    "dataModel": {
+                      "description": "Filepath or GRN of the model definition which contains the column being filtered.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "columnId",
+                    "dataModel",
+                    "excludeValues"
+                  ]
+                }
+              ]
+            }
+          },
+          "rows": {
+            "description": "Specifies the rows of blocks that belong to the section.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "blocks": {
+                  "description": "Specifies the blocks to display in this row.",
+                  "type": "array",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "additionalProperties": false,
+                        "type": "object",
+                        "properties": {
+                          "width": {
+                            "description": "Specifies the width of a content block (saved views, metric, or markdown)",
+                            "type": "number"
+                          },
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "markdown"
+                            ]
+                          },
+                          "text": {
+                            "description": "The markdown text content of this block.",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "text",
+                          "type"
+                        ]
+                      },
+                      {
+                        "additionalProperties": false,
+                        "type": "object",
+                        "properties": {
+                          "width": {
+                            "description": "Specifies the width of a content block (saved views, metric, or markdown)",
+                            "type": "number"
+                          },
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "metric"
+                            ]
+                          },
+                          "dataModel": {
+                            "description": "Filepath or GRN of the model definition which contains this metric.",
+                            "type": "string"
+                          },
+                          "dataModelMetricId": {
+                            "description": "ID of the metric column (in `dataModel`) to display",
+                            "type": "string"
+                          },
+                          "label": {
+                            "description": "Label to display for this block",
+                            "type": "string"
+                          },
+                          "filters": {
+                            "description": "Filters to apply when calculating the metric of this block",
+                            "type": "array",
+                            "items": {
+                              "anyOf": [
+                                {
+                                  "additionalProperties": false,
+                                  "type": "object",
+                                  "properties": {
+                                    "gt": {
+                                      "type": [
+                                        "null",
+                                        "string",
+                                        "number"
+                                      ]
+                                    },
+                                    "columnId": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "columnId",
+                                    "gt"
+                                  ]
+                                },
+                                {
+                                  "additionalProperties": false,
+                                  "type": "object",
+                                  "properties": {
+                                    "gte": {
+                                      "anyOf": [
+                                        {
+                                          "type": "array",
+                                          "items": [
+                                            {
+                                              "type": "number"
+                                            },
+                                            {
+                                              "enum": [
+                                                "day",
+                                                "hour",
+                                                "minute",
+                                                "month",
+                                                "week",
+                                                "year"
+                                              ],
+                                              "type": "string"
+                                            },
+                                            {
+                                              "type": "object",
+                                              "properties": {
+                                                "startOfPeriod": {
+                                                  "type": "boolean"
+                                                }
+                                              },
+                                              "additionalProperties": false
+                                            }
+                                          ],
+                                          "minItems": 2,
+                                          "maxItems": 3
+                                        },
+                                        {
+                                          "type": [
+                                            "null",
+                                            "string",
+                                            "number"
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    "columnId": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "columnId",
+                                    "gte"
+                                  ]
+                                },
+                                {
+                                  "additionalProperties": false,
+                                  "type": "object",
+                                  "properties": {
+                                    "lt": {
+                                      "anyOf": [
+                                        {
+                                          "type": "array",
+                                          "items": [
+                                            {
+                                              "type": "number"
+                                            },
+                                            {
+                                              "enum": [
+                                                "day",
+                                                "hour",
+                                                "minute",
+                                                "month",
+                                                "week",
+                                                "year"
+                                              ],
+                                              "type": "string"
+                                            },
+                                            {
+                                              "type": "object",
+                                              "properties": {
+                                                "startOfPeriod": {
+                                                  "type": "boolean"
+                                                }
+                                              },
+                                              "additionalProperties": false
+                                            }
+                                          ],
+                                          "minItems": 2,
+                                          "maxItems": 3
+                                        },
+                                        {
+                                          "type": [
+                                            "null",
+                                            "string",
+                                            "number"
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    "columnId": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "columnId",
+                                    "lt"
+                                  ]
+                                },
+                                {
+                                  "additionalProperties": false,
+                                  "type": "object",
+                                  "properties": {
+                                    "lte": {
+                                      "type": [
+                                        "null",
+                                        "string",
+                                        "number"
+                                      ]
+                                    },
+                                    "columnId": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "columnId",
+                                    "lte"
+                                  ]
+                                },
+                                {
+                                  "additionalProperties": false,
+                                  "type": "object",
+                                  "properties": {
+                                    "contains": {
+                                      "type": "string"
+                                    },
+                                    "columnId": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "columnId",
+                                    "contains"
+                                  ]
+                                },
+                                {
+                                  "additionalProperties": false,
+                                  "type": "object",
+                                  "properties": {
+                                    "range": {
+                                      "anyOf": [
+                                        {
+                                          "type": "array",
+                                          "items": [
+                                            {
+                                              "type": "string"
+                                            },
+                                            {
+                                              "type": "string"
+                                            }
+                                          ],
+                                          "minItems": 2,
+                                          "maxItems": 2
+                                        },
+                                        {
+                                          "type": "array",
+                                          "items": [
+                                            {
+                                              "type": "number"
+                                            },
+                                            {
+                                              "type": "number"
+                                            }
+                                          ],
+                                          "minItems": 2,
+                                          "maxItems": 2
+                                        },
+                                        {
+                                          "type": "array",
+                                          "items": [
+                                            {
+                                              "anyOf": [
+                                                {
+                                                  "type": "array",
+                                                  "items": [
+                                                    {
+                                                      "type": "number"
+                                                    },
+                                                    {
+                                                      "enum": [
+                                                        "day",
+                                                        "hour",
+                                                        "minute",
+                                                        "month",
+                                                        "week",
+                                                        "year"
+                                                      ],
+                                                      "type": "string"
+                                                    },
+                                                    {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "startOfPeriod": {
+                                                          "type": "boolean"
+                                                        }
+                                                      },
+                                                      "additionalProperties": false
+                                                    }
+                                                  ],
+                                                  "minItems": 2,
+                                                  "maxItems": 3
+                                                },
+                                                {
+                                                  "type": "string"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "anyOf": [
+                                                {
+                                                  "type": "array",
+                                                  "items": [
+                                                    {
+                                                      "type": "number"
+                                                    },
+                                                    {
+                                                      "enum": [
+                                                        "day",
+                                                        "hour",
+                                                        "minute",
+                                                        "month",
+                                                        "week",
+                                                        "year"
+                                                      ],
+                                                      "type": "string"
+                                                    },
+                                                    {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "startOfPeriod": {
+                                                          "type": "boolean"
+                                                        }
+                                                      },
+                                                      "additionalProperties": false
+                                                    }
+                                                  ],
+                                                  "minItems": 2,
+                                                  "maxItems": 3
+                                                },
+                                                {
+                                                  "type": "string"
+                                                }
+                                              ]
+                                            }
+                                          ],
+                                          "minItems": 2,
+                                          "maxItems": 2
+                                        }
+                                      ]
+                                    },
+                                    "columnId": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "columnId",
+                                    "range"
+                                  ]
+                                },
+                                {
+                                  "additionalProperties": false,
+                                  "type": "object",
+                                  "properties": {
+                                    "values": {
+                                      "anyOf": [
+                                        {
+                                          "type": "array",
+                                          "items": {
+                                            "type": [
+                                              "null",
+                                              "string"
+                                            ]
+                                          }
+                                        },
+                                        {
+                                          "type": "array",
+                                          "items": {
+                                            "type": [
+                                              "null",
+                                              "number"
+                                            ]
+                                          }
+                                        },
+                                        {
+                                          "type": "array",
+                                          "items": {
+                                            "type": [
+                                              "null",
+                                              "boolean"
+                                            ]
+                                          }
+                                        }
+                                      ]
+                                    },
+                                    "columnId": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "columnId",
+                                    "values"
+                                  ]
+                                },
+                                {
+                                  "additionalProperties": false,
+                                  "type": "object",
+                                  "properties": {
+                                    "excludeValues": {
+                                      "anyOf": [
+                                        {
+                                          "type": "array",
+                                          "items": {
+                                            "type": [
+                                              "null",
+                                              "string"
+                                            ]
+                                          }
+                                        },
+                                        {
+                                          "type": "array",
+                                          "items": {
+                                            "type": [
+                                              "null",
+                                              "number"
+                                            ]
+                                          }
+                                        },
+                                        {
+                                          "type": "array",
+                                          "items": {
+                                            "type": [
+                                              "null",
+                                              "boolean"
+                                            ]
+                                          }
+                                        }
+                                      ]
+                                    },
+                                    "columnId": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "columnId",
+                                    "excludeValues"
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "ignoreDashboardFilters": {
+                            "description": "Flag indicating whether the chart should ignore global & section filters",
+                            "type": "boolean"
+                          }
+                        },
+                        "required": [
+                          "dataModel",
+                          "dataModelMetricId",
+                          "type"
+                        ]
+                      },
+                      {
+                        "additionalProperties": false,
+                        "type": "object",
+                        "properties": {
+                          "width": {
+                            "description": "Specifies the width of a content block (saved views, metric, or markdown)",
+                            "type": "number"
+                          },
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "savedView"
+                            ]
+                          },
+                          "savedView": {
+                            "description": "Filepath or GRN of the saved view to display.",
+                            "type": "string"
+                          },
+                          "label": {
+                            "description": "Label to display for this block",
+                            "type": "string"
+                          },
+                          "axisLabels": {
+                            "description": "The visibility of axis labels when using an area, bar, or line chart",
+                            "enum": [
+                              "hide",
+                              "inherit",
+                              "show"
+                            ],
+                            "type": "string"
+                          },
+                          "legendPosition": {
+                            "description": "The position of the chart legend when using an area, bar, line, or horizontal bar chart",
+                            "enum": [
+                              "bottom",
+                              "inherit",
+                              "left",
+                              "none",
+                              "right",
+                              "top"
+                            ],
+                            "type": "string"
+                          },
+                          "ignoreDashboardFilters": {
+                            "description": "Flag indicating whether the chart should ignore global & section filters",
+                            "type": "boolean"
+                          },
+                          "legend": {
+                            "description": "Deprecated -- use \"legendPosition\" instead. This field is ignored.",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "savedView",
+                          "type"
+                        ]
+                      },
+                      {
+                        "additionalProperties": false,
+                        "type": "object",
+                        "properties": {
+                          "width": {
+                            "description": "Specifies the width of a content block (saved views, metric, or markdown)",
+                            "type": "number"
+                          },
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "empty"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "type"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "height": {
+                  "description": "Specifies the height of the row.",
+                  "type": "number"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "blocks"
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "rows"
+        ]
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "glean",
+    "name",
+    "sections",
+    "type"
+  ],
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

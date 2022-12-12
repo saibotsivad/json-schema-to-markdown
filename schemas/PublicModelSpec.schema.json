@@ -1,0 +1,426 @@
+{
+  "description": "Glean schema to represent data models.",
+  "type": "object",
+  "properties": {
+    "glean": {
+      "description": "The Glean file format version.",
+      "type": "string",
+      "enum": [
+        "1.0"
+      ]
+    },
+    "grn": {
+      "description": "The persistent identifier for this data model.",
+      "type": "string"
+    },
+    "name": {
+      "description": "The user-facing name for this data model.",
+      "type": "string"
+    },
+    "description": {
+      "description": "The user-facing description for this data model.",
+      "type": "string"
+    },
+    "type": {
+      "description": "The type of this resource, which in this case should always be \"model\".",
+      "enum": [
+        "model"
+      ],
+      "type": "string"
+    },
+    "source": {
+      "description": "The data source to read from.",
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "connectionId": {
+              "type": "string"
+            },
+            "physicalName": {
+              "description": "The name of the table to fetch data from.",
+              "type": "string"
+            },
+            "schema": {
+              "description": "The schema to use when connecting to this data source.",
+              "type": "string"
+            },
+            "sql": {
+              "description": "The SQL statement used to fetch data. If `physicalName` is specified, this will be ignored.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "connectionId",
+            "physicalName"
+          ]
+        },
+        {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "connectionName": {
+              "type": "string"
+            },
+            "physicalName": {
+              "description": "The name of the table to fetch data from.",
+              "type": "string"
+            },
+            "schema": {
+              "description": "The schema to use when connecting to this data source.",
+              "type": "string"
+            },
+            "sql": {
+              "description": "The SQL statement used to fetch data. If `physicalName` is specified, this will be ignored.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "connectionName",
+            "physicalName"
+          ]
+        },
+        {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "connectionId": {
+              "type": "string"
+            },
+            "sql": {
+              "description": "The SQL statement used to fetch data.",
+              "type": "string"
+            },
+            "schema": {
+              "description": "The schema to use when connecting to this data source.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "connectionId",
+            "sql"
+          ]
+        },
+        {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "connectionName": {
+              "type": "string"
+            },
+            "sql": {
+              "description": "The SQL statement used to fetch data.",
+              "type": "string"
+            },
+            "schema": {
+              "description": "The schema to use when connecting to this data source.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "connectionName",
+            "sql"
+          ]
+        }
+      ]
+    },
+    "cols": {
+      "description": "The columns (metrics, attributes, dates) of the data model.",
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "$ref": "#/definitions/AttributeColumn"
+          },
+          {
+            "$ref": "#/definitions/DateColumn"
+          },
+          {
+            "$ref": "#/definitions/MetricColumn"
+          },
+          {
+            "$ref": "#/definitions/MetricCountColumn"
+          },
+          {
+            "$ref": "#/definitions/MetricSqlColumn"
+          }
+        ]
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "cols",
+    "glean",
+    "name",
+    "source"
+  ],
+  "definitions": {
+    "AttributeColumn": {
+      "description": "Specifies an attribute column.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The persistent identifier for the column.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of this column, which in this case should always be \"attribute\".",
+          "type": "string",
+          "enum": [
+            "attribute"
+          ]
+        },
+        "physicalName": {
+          "description": "The name of the column as it appears in the underlying data source.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The user-visible description for this column.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The user-visible name for this column.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "physicalName",
+        "type"
+      ]
+    },
+    "DateColumn": {
+      "description": "Specifies a date column.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The persistent identifier for the column.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of this column, which in this case should always be \"datetime\".",
+          "type": "string",
+          "enum": [
+            "datetime"
+          ]
+        },
+        "description": {
+          "description": "The user-visible description for this column.",
+          "type": "string"
+        },
+        "physicalName": {
+          "description": "The name of the column as it appears in the underlying data source.",
+          "type": "string"
+        },
+        "primaryDate": {
+          "description": "Flag indicating whether the column is the primary date. Exactly one datetime column should have this set to true.",
+          "type": "boolean"
+        },
+        "name": {
+          "description": "The user-visible name for this column.",
+          "type": "string"
+        },
+        "aggregationOptions": {
+          "description": "Optional aggregation settings.",
+          "type": "object",
+          "properties": {
+            "minGranularity": {
+              "description": "The minimum granularity a user can select for this column.",
+              "enum": [
+                "day",
+                "hour",
+                "minute",
+                "month",
+                "quarter",
+                "second",
+                "week",
+                "year"
+              ],
+              "type": "string"
+            },
+            "maxGranularity": {
+              "description": "The maximum granularity a user can select for this column.",
+              "enum": [
+                "day",
+                "hour",
+                "minute",
+                "month",
+                "quarter",
+                "second",
+                "week",
+                "year"
+              ],
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "physicalName",
+        "type"
+      ]
+    },
+    "MetricColumn": {
+      "description": "Specifies a metric column that fetches data from a column in the underlying data source.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The persistent identifier for the column.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of this column, which in this case should always be \"metric\".",
+          "type": "string",
+          "enum": [
+            "metric"
+          ]
+        },
+        "physicalName": {
+          "description": "The name of the column as it appears in the underlying data source.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The user-visible name for this column.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The user-visible description for this column.",
+          "type": "string"
+        },
+        "aggregate": {
+          "description": "Specifies how to aggregate data from this column.",
+          "enum": [
+            "avg",
+            "count",
+            "count_distinct",
+            "max",
+            "min",
+            "sum"
+          ],
+          "type": "string"
+        },
+        "formattingOptions": {
+          "description": "Optional formatting settings for metrics.",
+          "$ref": "#/definitions/MetricFormattingOptions"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "aggregate",
+        "id",
+        "name",
+        "physicalName",
+        "type"
+      ]
+    },
+    "MetricFormattingOptions": {
+      "description": "Optional formatting settings for metrics.",
+      "type": "object",
+      "properties": {
+        "fixedDecimals": {
+          "description": "The number of fixed decimal places to display.",
+          "type": "number"
+        },
+        "commaThousandsSeparators": {
+          "description": "Whether to use commas to separate thousands. Defaults to true.",
+          "type": "boolean"
+        },
+        "formatAsDollars": {
+          "description": "If true, the metric wil be formatted with a leading dollar sign.",
+          "type": "boolean"
+        },
+        "formatAsPercent": {
+          "description": "If true, the metric will be multiplied by 100 and formatted with a trailing % sign.",
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "MetricCountColumn": {
+      "description": "Specifies the \"row count\" metric column.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The persistent identifier for this column.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of this column, which in this case should always be \"metric\".",
+          "type": "string",
+          "enum": [
+            "metric"
+          ]
+        },
+        "name": {
+          "description": "The user-visible name for this column.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The user-visible description for this column.",
+          "type": "string"
+        },
+        "aggregate": {
+          "description": "The type of aggregation for this column, which in this case should always be \"row_count\".",
+          "type": "string",
+          "enum": [
+            "row_count"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "aggregate",
+        "id",
+        "name",
+        "type"
+      ]
+    },
+    "MetricSqlColumn": {
+      "description": "Specifies a metric column that fetches data using a custom SQL aggregation.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The persistent identifier for the column.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of this column, which in this case should always be \"metric\".",
+          "type": "string",
+          "enum": [
+            "metric"
+          ]
+        },
+        "name": {
+          "description": "The user-visible name for this column.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The user-visible description for this column.",
+          "type": "string"
+        },
+        "sql": {
+          "description": "SQL expression defining the column.",
+          "type": "string"
+        },
+        "formattingOptions": {
+          "description": "Optional formatting settings for metrics.",
+          "$ref": "#/definitions/MetricFormattingOptions"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "sql",
+        "type"
+      ]
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

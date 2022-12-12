@@ -1,0 +1,89 @@
+{
+  "description": "Glean schema to represent color palettes in data ops.",
+  "type": "object",
+  "properties": {
+    "glean": {
+      "description": "The Glean file format version.",
+      "type": "string",
+      "enum": [
+        "1.0"
+      ]
+    },
+    "grn": {
+      "description": "The persistent identifier for this color palette.",
+      "type": "string"
+    },
+    "name": {
+      "description": "The user-visible name of this color palette.",
+      "type": "string"
+    },
+    "type": {
+      "description": "The type of this resource, which in this case should always be \"color_palette\".",
+      "type": "string",
+      "enum": [
+        "color_palette"
+      ]
+    },
+    "defaultColor": {
+      "description": "The default custom color of this color palette.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "color"
+      ]
+    },
+    "colors": {
+      "description": "The custom colors of this color palette.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "color"
+        ]
+      }
+    },
+    "options": {
+      "description": "The additional options of this color palette.",
+      "type": "object",
+      "properties": {
+        "additionalColorGeneration": {
+          "enum": [
+            "interpolate",
+            "repeat"
+          ],
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "additionalColorGeneration"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "colors",
+    "defaultColor",
+    "glean",
+    "name",
+    "type"
+  ],
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

@@ -1,0 +1,1511 @@
+{
+  "anyOf": [
+    {
+      "$ref": "#/definitions/AggregatedSavedViewSpec"
+    },
+    {
+      "$ref": "#/definitions/PublicSourceDataTableSpec"
+    }
+  ],
+  "definitions": {
+    "AggregatedSavedViewSpec": {
+      "description": "Spec for saved views that visualize aggregated data.",
+      "type": "object",
+      "properties": {
+        "visualization": {
+          "description": "Information about the visualization of the saved view.",
+          "type": "object",
+          "properties": {
+            "chartType": {
+              "description": "The chart type.",
+              "enum": [
+                "area",
+                "bar",
+                "line",
+                "pivot",
+                "table"
+              ],
+              "type": "string"
+            },
+            "colorPalette": {
+              "description": "The file path to the color palette definition.",
+              "type": "string"
+            },
+            "showOther": {
+              "description": "Flag indicating whether unfiltered items should be displayed in an \"Other\" group when a breakout is active.",
+              "type": "boolean"
+            },
+            "stack": {
+              "description": "The stacking type, when using an \"area\", \"bar\", or \"line\" chart).",
+              "enum": [
+                "stack",
+                "stack100pct",
+                "unstack"
+              ],
+              "type": "string"
+            },
+            "showAxisLabels": {
+              "description": "Whether to show the axis labels when using an \"area\", \"bar\", or \"line\" chart",
+              "type": "boolean"
+            },
+            "missingValuesBehavior": {
+              "description": "Whether to show missing values for a \"bar\" chart",
+              "enum": [
+                "hide",
+                "show"
+              ],
+              "type": "string"
+            },
+            "legend": {
+              "description": "The position of the chart legend when using an \"area\", \"bar\", \"line\" or horizontal bar chart",
+              "enum": [
+                "bottom",
+                "left",
+                "none",
+                "right",
+                "top"
+              ],
+              "type": "string"
+            },
+            "tableColor": {
+              "description": "A gradient table color to be used in conjunction with table calculations in a \"pivot\" chart",
+              "enum": [
+                "blue",
+                "green",
+                "none",
+                "red"
+              ],
+              "type": "string"
+            },
+            "padding": {
+              "description": "The amount of table padding to apply in a \"pivot\" or \"table\" chart",
+              "enum": [
+                "compact",
+                "default"
+              ],
+              "type": "string"
+            },
+            "showBarLabels": {
+              "description": "Whether to show labels in a \"horizontal bar\" chart",
+              "type": "boolean"
+            },
+            "tableVisualization": {
+              "description": "Cell visualizations for table or pivot charts",
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "calculation": {
+                        "enum": [
+                          "columnPercentMax",
+                          "columnPercentTotal",
+                          "rowPercentMax",
+                          "rowPercentTotal"
+                        ],
+                        "type": "string"
+                      },
+                      "columnId": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "bar"
+                        ]
+                      },
+                      "maxWidthPixels": {
+                        "type": "number"
+                      },
+                      "heightPixels": {
+                        "type": "number"
+                      },
+                      "labelPlacement": {
+                        "enum": [
+                          "floating",
+                          "none",
+                          "right"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "calculation",
+                      "heightPixels",
+                      "labelPlacement",
+                      "maxWidthPixels",
+                      "type"
+                    ]
+                  },
+                  {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "calculation": {
+                        "enum": [
+                          "columnPercentMax",
+                          "columnPercentTotal",
+                          "rowPercentMax",
+                          "rowPercentTotal"
+                        ],
+                        "type": "string"
+                      },
+                      "metricFormulaName": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "bar"
+                        ]
+                      },
+                      "maxWidthPixels": {
+                        "type": "number"
+                      },
+                      "heightPixels": {
+                        "type": "number"
+                      },
+                      "labelPlacement": {
+                        "enum": [
+                          "floating",
+                          "none",
+                          "right"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "calculation",
+                      "heightPixels",
+                      "labelPlacement",
+                      "maxWidthPixels",
+                      "type"
+                    ]
+                  }
+                ]
+              }
+            },
+            "tableCellFormatting": {
+              "description": "Cell formatting for table or pivot charts",
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "calculation": {
+                        "enum": [
+                          "columnPercentMax",
+                          "columnPercentTotal",
+                          "rowPercentMax",
+                          "rowPercentTotal"
+                        ],
+                        "type": "string"
+                      },
+                      "columnId": {
+                        "type": "string"
+                      },
+                      "color": {
+                        "$ref": "#/definitions/TableColorSpec"
+                      },
+                      "showPercentage": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "calculation",
+                      "color"
+                    ]
+                  },
+                  {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "calculation": {
+                        "enum": [
+                          "columnPercentMax",
+                          "columnPercentTotal",
+                          "rowPercentMax",
+                          "rowPercentTotal"
+                        ],
+                        "type": "string"
+                      },
+                      "metricFormulaName": {
+                        "type": "string"
+                      },
+                      "color": {
+                        "$ref": "#/definitions/TableColorSpec"
+                      },
+                      "showPercentage": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "calculation",
+                      "color"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "chartType"
+          ]
+        },
+        "data": {
+          "description": "Information about the data of the saved view.",
+          "type": "object",
+          "properties": {
+            "x": {
+              "description": "One or more columns to use as the x axis in the visualization. (Specifying multiple columns is only applicable when using a Table visualization.)",
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/PublicDatetimeOrAttributeSpec"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/PublicDatetimeOrAttributeSpec"
+                  }
+                }
+              ]
+            },
+            "y": {
+              "description": "One or more columns to use as the y axis in the visualization. (Specifying multiple columns is only applicable when using a Table visualization.)",
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "columnId": {
+                      "description": "The column identifier of the column.",
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "columnId"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "description": "The user-visible name of this metric.",
+                      "type": "string"
+                    },
+                    "formula": {
+                      "description": "A calculated metric formula.",
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "formula",
+                    "name"
+                  ]
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "description": "Specifies a column to use as a y axis.",
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "columnId": {
+                            "description": "The column identifier of the column.",
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                          "columnId"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "description": "The user-visible name of this metric.",
+                            "type": "string"
+                          },
+                          "formula": {
+                            "description": "A calculated metric formula.",
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                          "formula",
+                          "name"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "breakout": {
+              "description": "Specifies a color breakout to display in the visualization.",
+              "type": "object",
+              "properties": {
+                "columnId": {
+                  "description": "The column identifier of the column used for the breakout.",
+                  "type": "string"
+                },
+                "groups": {
+                  "description": "The list of values to group by.",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "description": "The value to group by.",
+                        "type": [
+                          "null",
+                          "string",
+                          "number",
+                          "boolean"
+                        ]
+                      },
+                      "index": {
+                        "description": "The ordering to use when displaying this group (starting with 0).",
+                        "type": "number"
+                      },
+                      "color": {
+                        "description": "The color of this breakout group",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                      "key"
+                    ]
+                  }
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "columnId",
+                "groups"
+              ]
+            },
+            "trellis": {
+              "description": "Specifies a trellis breakout to display in the visualization.",
+              "type": "object",
+              "properties": {
+                "columnId": {
+                  "description": "The column identifier of the column used for the breakout.",
+                  "type": "string"
+                },
+                "showOther": {
+                  "description": "If true, will collect any values not in `groups` under an \"Other\" group. Defaults to `true`.",
+                  "type": "boolean"
+                },
+                "groups": {
+                  "description": "The list of values to group by.",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "description": "The value to group by.",
+                        "type": [
+                          "null",
+                          "string",
+                          "boolean"
+                        ]
+                      }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                      "key"
+                    ]
+                  }
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "columnId",
+                "groups"
+              ]
+            },
+            "filters": {
+              "description": "Specifies filters that are applied by default in this view.",
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "gt": {
+                        "type": [
+                          "null",
+                          "string",
+                          "number"
+                        ]
+                      },
+                      "columnId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "columnId",
+                      "gt"
+                    ]
+                  },
+                  {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "gte": {
+                        "anyOf": [
+                          {
+                            "type": "array",
+                            "items": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "enum": [
+                                  "day",
+                                  "hour",
+                                  "minute",
+                                  "month",
+                                  "week",
+                                  "year"
+                                ],
+                                "type": "string"
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "startOfPeriod": {
+                                    "type": "boolean"
+                                  }
+                                },
+                                "additionalProperties": false
+                              }
+                            ],
+                            "minItems": 2,
+                            "maxItems": 3
+                          },
+                          {
+                            "type": [
+                              "null",
+                              "string",
+                              "number"
+                            ]
+                          }
+                        ]
+                      },
+                      "columnId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "columnId",
+                      "gte"
+                    ]
+                  },
+                  {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "lt": {
+                        "anyOf": [
+                          {
+                            "type": "array",
+                            "items": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "enum": [
+                                  "day",
+                                  "hour",
+                                  "minute",
+                                  "month",
+                                  "week",
+                                  "year"
+                                ],
+                                "type": "string"
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "startOfPeriod": {
+                                    "type": "boolean"
+                                  }
+                                },
+                                "additionalProperties": false
+                              }
+                            ],
+                            "minItems": 2,
+                            "maxItems": 3
+                          },
+                          {
+                            "type": [
+                              "null",
+                              "string",
+                              "number"
+                            ]
+                          }
+                        ]
+                      },
+                      "columnId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "columnId",
+                      "lt"
+                    ]
+                  },
+                  {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "lte": {
+                        "type": [
+                          "null",
+                          "string",
+                          "number"
+                        ]
+                      },
+                      "columnId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "columnId",
+                      "lte"
+                    ]
+                  },
+                  {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "contains": {
+                        "type": "string"
+                      },
+                      "columnId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "columnId",
+                      "contains"
+                    ]
+                  },
+                  {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "range": {
+                        "anyOf": [
+                          {
+                            "type": "array",
+                            "items": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ],
+                            "minItems": 2,
+                            "maxItems": 2
+                          },
+                          {
+                            "type": "array",
+                            "items": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "number"
+                              }
+                            ],
+                            "minItems": 2,
+                            "maxItems": 2
+                          },
+                          {
+                            "type": "array",
+                            "items": [
+                              {
+                                "anyOf": [
+                                  {
+                                    "type": "array",
+                                    "items": [
+                                      {
+                                        "type": "number"
+                                      },
+                                      {
+                                        "enum": [
+                                          "day",
+                                          "hour",
+                                          "minute",
+                                          "month",
+                                          "week",
+                                          "year"
+                                        ],
+                                        "type": "string"
+                                      },
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "startOfPeriod": {
+                                            "type": "boolean"
+                                          }
+                                        },
+                                        "additionalProperties": false
+                                      }
+                                    ],
+                                    "minItems": 2,
+                                    "maxItems": 3
+                                  },
+                                  {
+                                    "type": "string"
+                                  }
+                                ]
+                              },
+                              {
+                                "anyOf": [
+                                  {
+                                    "type": "array",
+                                    "items": [
+                                      {
+                                        "type": "number"
+                                      },
+                                      {
+                                        "enum": [
+                                          "day",
+                                          "hour",
+                                          "minute",
+                                          "month",
+                                          "week",
+                                          "year"
+                                        ],
+                                        "type": "string"
+                                      },
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "startOfPeriod": {
+                                            "type": "boolean"
+                                          }
+                                        },
+                                        "additionalProperties": false
+                                      }
+                                    ],
+                                    "minItems": 2,
+                                    "maxItems": 3
+                                  },
+                                  {
+                                    "type": "string"
+                                  }
+                                ]
+                              }
+                            ],
+                            "minItems": 2,
+                            "maxItems": 2
+                          }
+                        ]
+                      },
+                      "columnId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "columnId",
+                      "range"
+                    ]
+                  },
+                  {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "values": {
+                        "anyOf": [
+                          {
+                            "type": "array",
+                            "items": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            }
+                          },
+                          {
+                            "type": "array",
+                            "items": {
+                              "type": [
+                                "null",
+                                "number"
+                              ]
+                            }
+                          },
+                          {
+                            "type": "array",
+                            "items": {
+                              "type": [
+                                "null",
+                                "boolean"
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      "columnId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "columnId",
+                      "values"
+                    ]
+                  },
+                  {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "excludeValues": {
+                        "anyOf": [
+                          {
+                            "type": "array",
+                            "items": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            }
+                          },
+                          {
+                            "type": "array",
+                            "items": {
+                              "type": [
+                                "null",
+                                "number"
+                              ]
+                            }
+                          },
+                          {
+                            "type": "array",
+                            "items": {
+                              "type": [
+                                "null",
+                                "boolean"
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      "columnId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "columnId",
+                      "excludeValues"
+                    ]
+                  }
+                ]
+              }
+            },
+            "sort": {
+              "description": "Specifies column sorts for tables.",
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "order": {
+                        "enum": [
+                          "asc",
+                          "desc"
+                        ],
+                        "type": "string"
+                      },
+                      "columnId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "columnId",
+                      "order"
+                    ]
+                  },
+                  {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "order": {
+                        "enum": [
+                          "asc",
+                          "desc"
+                        ],
+                        "type": "string"
+                      },
+                      "metricFormulaName": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "metricFormulaName",
+                      "order"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "x",
+            "y"
+          ]
+        },
+        "glean": {
+          "description": "The Glean file format version.",
+          "type": "string",
+          "enum": [
+            "1.0"
+          ]
+        },
+        "grn": {
+          "description": "The persistent identifier for this saved view.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The user-visible name of this saved view.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of this resource, which in this case should always be \"saved_view\".",
+          "type": "string",
+          "enum": [
+            "saved_view"
+          ]
+        },
+        "model": {
+          "description": "The file path to the data model definition.",
+          "type": "string"
+        },
+        "hidden": {
+          "description": "A list of attribute column identifiers to hide in this view.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "data",
+        "glean",
+        "model",
+        "name",
+        "type",
+        "visualization"
+      ]
+    },
+    "TableColorSpec": {
+      "enum": [
+        "blue",
+        "green",
+        "none",
+        "red"
+      ],
+      "type": "string"
+    },
+    "PublicDatetimeOrAttributeSpec": {
+      "type": "object",
+      "properties": {
+        "columnId": {
+          "description": "The column identifier of the column.",
+          "type": "string"
+        },
+        "granularity": {
+          "description": "Which granularity to use when aggregating data, if this is a datetime column.",
+          "enum": [
+            "day",
+            "hour",
+            "minute",
+            "month",
+            "quarter",
+            "second",
+            "week",
+            "year"
+          ],
+          "type": "string"
+        },
+        "bins": {
+          "description": "Specifies binning options for a numeric column.",
+          "type": "object",
+          "properties": {
+            "binWidth": {
+              "description": "The bin width for grouping data from this column.",
+              "type": "number"
+            },
+            "binsEnabled": {
+              "description": "If binsEnabled is omitted, bins will still be enabled.",
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "binWidth"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "columnId"
+      ]
+    },
+    "PublicSourceDataTableSpec": {
+      "type": "object",
+      "properties": {
+        "visualization": {
+          "type": "object",
+          "properties": {
+            "chartType": {
+              "type": "string",
+              "enum": [
+                "source_data_table"
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "chartType"
+          ]
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "y": {
+              "description": "A metric, if specified, that will be used in the metric on the sidebar.",
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "columnId": {
+                      "description": "The column identifier of the column.",
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "columnId"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "description": "The user-visible name of this metric.",
+                      "type": "string"
+                    },
+                    "formula": {
+                      "description": "A calculated metric formula.",
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "formula",
+                    "name"
+                  ]
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "description": "Specifies a column to use as a y axis.",
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "columnId": {
+                            "description": "The column identifier of the column.",
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                          "columnId"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "description": "The user-visible name of this metric.",
+                            "type": "string"
+                          },
+                          "formula": {
+                            "description": "A calculated metric formula.",
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                          "formula",
+                          "name"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "limit": {
+              "description": "Specifies how many records to load and show. Only supported by the source_data_table visualization.",
+              "type": "number"
+            },
+            "filters": {
+              "description": "Specifies filters that are applied by default in this view.",
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "gt": {
+                        "type": [
+                          "null",
+                          "string",
+                          "number"
+                        ]
+                      },
+                      "columnId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "columnId",
+                      "gt"
+                    ]
+                  },
+                  {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "gte": {
+                        "anyOf": [
+                          {
+                            "type": "array",
+                            "items": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "enum": [
+                                  "day",
+                                  "hour",
+                                  "minute",
+                                  "month",
+                                  "week",
+                                  "year"
+                                ],
+                                "type": "string"
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "startOfPeriod": {
+                                    "type": "boolean"
+                                  }
+                                },
+                                "additionalProperties": false
+                              }
+                            ],
+                            "minItems": 2,
+                            "maxItems": 3
+                          },
+                          {
+                            "type": [
+                              "null",
+                              "string",
+                              "number"
+                            ]
+                          }
+                        ]
+                      },
+                      "columnId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "columnId",
+                      "gte"
+                    ]
+                  },
+                  {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "lt": {
+                        "anyOf": [
+                          {
+                            "type": "array",
+                            "items": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "enum": [
+                                  "day",
+                                  "hour",
+                                  "minute",
+                                  "month",
+                                  "week",
+                                  "year"
+                                ],
+                                "type": "string"
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "startOfPeriod": {
+                                    "type": "boolean"
+                                  }
+                                },
+                                "additionalProperties": false
+                              }
+                            ],
+                            "minItems": 2,
+                            "maxItems": 3
+                          },
+                          {
+                            "type": [
+                              "null",
+                              "string",
+                              "number"
+                            ]
+                          }
+                        ]
+                      },
+                      "columnId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "columnId",
+                      "lt"
+                    ]
+                  },
+                  {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "lte": {
+                        "type": [
+                          "null",
+                          "string",
+                          "number"
+                        ]
+                      },
+                      "columnId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "columnId",
+                      "lte"
+                    ]
+                  },
+                  {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "contains": {
+                        "type": "string"
+                      },
+                      "columnId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "columnId",
+                      "contains"
+                    ]
+                  },
+                  {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "range": {
+                        "anyOf": [
+                          {
+                            "type": "array",
+                            "items": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ],
+                            "minItems": 2,
+                            "maxItems": 2
+                          },
+                          {
+                            "type": "array",
+                            "items": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "number"
+                              }
+                            ],
+                            "minItems": 2,
+                            "maxItems": 2
+                          },
+                          {
+                            "type": "array",
+                            "items": [
+                              {
+                                "anyOf": [
+                                  {
+                                    "type": "array",
+                                    "items": [
+                                      {
+                                        "type": "number"
+                                      },
+                                      {
+                                        "enum": [
+                                          "day",
+                                          "hour",
+                                          "minute",
+                                          "month",
+                                          "week",
+                                          "year"
+                                        ],
+                                        "type": "string"
+                                      },
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "startOfPeriod": {
+                                            "type": "boolean"
+                                          }
+                                        },
+                                        "additionalProperties": false
+                                      }
+                                    ],
+                                    "minItems": 2,
+                                    "maxItems": 3
+                                  },
+                                  {
+                                    "type": "string"
+                                  }
+                                ]
+                              },
+                              {
+                                "anyOf": [
+                                  {
+                                    "type": "array",
+                                    "items": [
+                                      {
+                                        "type": "number"
+                                      },
+                                      {
+                                        "enum": [
+                                          "day",
+                                          "hour",
+                                          "minute",
+                                          "month",
+                                          "week",
+                                          "year"
+                                        ],
+                                        "type": "string"
+                                      },
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "startOfPeriod": {
+                                            "type": "boolean"
+                                          }
+                                        },
+                                        "additionalProperties": false
+                                      }
+                                    ],
+                                    "minItems": 2,
+                                    "maxItems": 3
+                                  },
+                                  {
+                                    "type": "string"
+                                  }
+                                ]
+                              }
+                            ],
+                            "minItems": 2,
+                            "maxItems": 2
+                          }
+                        ]
+                      },
+                      "columnId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "columnId",
+                      "range"
+                    ]
+                  },
+                  {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "values": {
+                        "anyOf": [
+                          {
+                            "type": "array",
+                            "items": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            }
+                          },
+                          {
+                            "type": "array",
+                            "items": {
+                              "type": [
+                                "null",
+                                "number"
+                              ]
+                            }
+                          },
+                          {
+                            "type": "array",
+                            "items": {
+                              "type": [
+                                "null",
+                                "boolean"
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      "columnId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "columnId",
+                      "values"
+                    ]
+                  },
+                  {
+                    "additionalProperties": false,
+                    "type": "object",
+                    "properties": {
+                      "excludeValues": {
+                        "anyOf": [
+                          {
+                            "type": "array",
+                            "items": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            }
+                          },
+                          {
+                            "type": "array",
+                            "items": {
+                              "type": [
+                                "null",
+                                "number"
+                              ]
+                            }
+                          },
+                          {
+                            "type": "array",
+                            "items": {
+                              "type": [
+                                "null",
+                                "boolean"
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      "columnId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "columnId",
+                      "excludeValues"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "glean": {
+          "description": "The Glean file format version.",
+          "type": "string",
+          "enum": [
+            "1.0"
+          ]
+        },
+        "grn": {
+          "description": "The persistent identifier for this saved view.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The user-visible name of this saved view.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of this resource, which in this case should always be \"saved_view\".",
+          "type": "string",
+          "enum": [
+            "saved_view"
+          ]
+        },
+        "model": {
+          "description": "The file path to the data model definition.",
+          "type": "string"
+        },
+        "hidden": {
+          "description": "A list of attribute column identifiers to hide in this view.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "data",
+        "glean",
+        "model",
+        "name",
+        "type",
+        "visualization"
+      ]
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
